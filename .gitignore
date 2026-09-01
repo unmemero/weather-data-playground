@@ -32,3 +32,6 @@ pnpm-debug.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# Local testing and scratch files
+e2e_test_results.md
