@@ -1,0 +1,25 @@
+services:
+  weather-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: weather_workbook_app
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - STATIC_DIR=/app/dist
+      - RUST_LOG=backend=info,tower_http=info
+    volumes:
+      - weather_data:/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/locations"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  weather_data:
+    driver: local

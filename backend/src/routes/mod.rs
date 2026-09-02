@@ -569,13 +569,15 @@ pub async fn import_csv_handler(
 // Router Builder
 // ----------------------------------------------------------------------------
 
+use tower_http::services::{ServeDir, ServeFile};
+
 pub fn create_router(state: AppState) -> Router {
     let cors = CorsLayer::new()
         .allow_origin(Any)
         .allow_methods(Any)
         .allow_headers(Any);
 
-    Router::new()
+    let api_router = Router::new()
         // Locations
         .route("/api/locations", get(list_locations_handler))
         .route("/api/locations/search", get(search_locations_handler))
@@ -596,5 +598,14 @@ pub fn create_router(state: AppState) -> Router {
         .route("/api/weather/export/csv", get(export_csv_handler))
         .route("/api/weather/import/csv", post(import_csv_handler))
         .layer(cors)
-        .with_state(state)
+        .with_state(state);
+
+    let static_dir = std::env::var("STATIC_DIR").unwrap_or_else(|_| "dist".to_string());
+    if std::path::Path::new(&static_dir).exists() {
+        let serve_dir = ServeDir::new(&static_dir)
+            .not_found_service(ServeFile::new(format!("{}/index.html", static_dir)));
+        api_router.fallback_service(serve_dir)
+    } else {
+        api_router
+    }
 }

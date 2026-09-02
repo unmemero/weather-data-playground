@@ -1,0 +1,12 @@
+node_modules
+target
+dist
+.git
+.gitignore
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+.gemini
+e2e_test_results.md
+.DS_Store

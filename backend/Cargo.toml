@@ -14,7 +14,7 @@ chrono = { version = "0.4", features = ["serde"] }
 thiserror = "2.0"
 url = "2.5"
 tower = { version = "0.5", features = ["util"] }
-tower-http = { version = "0.5", features = ["cors", "trace"] }
+tower-http = { version = "0.5", features = ["cors", "trace", "fs"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 http-body-util = "0.1"
