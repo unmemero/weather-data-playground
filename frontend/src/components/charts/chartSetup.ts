@@ -1,31 +1,7 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  RadialLinearScale,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-} from 'chart.js';
+import { Chart as ChartJS, registerables } from 'chart.js';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  RadialLinearScale,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-);
+// Register all Chart.js controllers (Line, Scatter, Radar, Bar, etc.), elements, plugins, and scales
+ChartJS.register(...registerables);
 
 // Global Dark Mode Theme Configuration
 ChartJS.defaults.color = '#94a3b8';

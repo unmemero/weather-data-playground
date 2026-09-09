@@ -11,6 +11,7 @@ import {
   Sparkles,
   AlertTriangle,
   XCircle,
+  Table as TableIcon,
 } from 'lucide-react';
 import { WeatherProvider, useWeather } from './context/WeatherContext';
 import { TimeseriesChart, MetricKey } from './components/charts/TimeseriesChart';
@@ -25,9 +26,11 @@ import { OnboardingHero } from './components/dashboard/OnboardingHero';
 import { CitySearchModal } from './components/modals/CitySearchModal';
 import { CaseStudyModal } from './components/modals/CaseStudyModal';
 import { CsvModal } from './components/modals/CsvModal';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { RawDataTable } from './components/data/RawDataTable';
 import { ScatterPoint } from './types';
 
-type ActiveTab = 'timeseries' | 'correlation' | 'wind' | 'education';
+type ActiveTab = 'timeseries' | 'correlation' | 'wind' | 'education' | 'data';
 
 const MainLayout: React.FC = () => {
   const {
@@ -242,19 +245,34 @@ const MainLayout: React.FC = () => {
                 <BookOpen className="w-4 h-4" />
                 <span>Atmospheric Physics Reference</span>
               </button>
+
+              <button
+                onClick={() => setActiveTab('data')}
+                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-colors ${
+                  activeTab === 'data'
+                    ? 'border-cyan-400 text-cyan-300'
+                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <TableIcon className="w-4 h-4" />
+                <span>Raw Data & Telemetry</span>
+              </button>
             </div>
           </nav>
 
           {/* Main Tab Panes */}
           <main className="flex-1 max-w-7xl mx-auto w-full p-6 flex flex-col gap-6">
-            {/* Live Observation Conditions Ribbon */}
-            <CurrentConditionsRibbon
-              readings={readings}
-              cityName={activeLocation?.name}
-              timezone={activeLocation?.timezone}
-            />
+            <ErrorBoundary fallbackTitle="Live Conditions Error">
+              {/* Live Observation Conditions Ribbon */}
+              <CurrentConditionsRibbon
+                readings={readings}
+                cityName={activeLocation?.name}
+                timezone={activeLocation?.timezone}
+              />
+            </ErrorBoundary>
 
-            {/* TAB 1: Timeseries Explorer */}
+            <ErrorBoundary fallbackTitle="Workbook Tab View Error">
+              {/* TAB 1: Timeseries Explorer */}
             {activeTab === 'timeseries' && (
               <div className="flex flex-col gap-6 animate-in fade-in duration-200">
                 <TimeseriesChart
@@ -355,6 +373,18 @@ const MainLayout: React.FC = () => {
                 <MeteorologyExplanationCard />
               </div>
             )}
+
+            {/* TAB 5: Raw Telemetry Data Table */}
+            {activeTab === 'data' && (
+              <div className="flex flex-col gap-6 animate-in fade-in duration-200">
+                <RawDataTable
+                  readings={readings}
+                  cityName={activeLocation?.name}
+                  seriesId={selectedSeriesId}
+                />
+              </div>
+            )}
+            </ErrorBoundary>
           </main>
         </>
       )}

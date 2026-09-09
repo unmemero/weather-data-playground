@@ -88,6 +88,11 @@ describe('Main Dashboard & Workbench Assembly', () => {
     const eduTab = screen.getByText(/Atmospheric Physics Reference/i);
     fireEvent.click(eduTab);
     expect(screen.getByText(/Atmospheric Physics & Pedagogical Reference/i)).toBeInTheDocument();
+
+    // 5. Switch to Raw Data & Telemetry Tab
+    const dataTab = screen.getByText(/Raw Data & Telemetry/i);
+    fireEvent.click(dataTab);
+    expect(screen.getByTestId('raw-data-table-container')).toBeInTheDocument();
   });
 
   it('opens city search and CSV modals when clicked', async () => {

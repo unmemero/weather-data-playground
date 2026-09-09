@@ -1,9 +1,30 @@
 import React, { useMemo } from 'react';
 import { Line } from 'react-chartjs-2';
 import './chartSetup';
+import {
+  Chart as ChartJS,
+  ScatterController,
+  LineController,
+  PointElement,
+  LineElement,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { CorrelationStats, ScatterPoint } from '../../types';
 import { METRIC_CONFIGS, MetricKey } from './TimeseriesChart';
 import { Target } from 'lucide-react';
+
+ChartJS.register(
+  ScatterController,
+  LineController,
+  PointElement,
+  LineElement,
+  LinearScale,
+  Tooltip,
+  Legend
+);
+
 
 interface CorrelationScatterChartProps {
   stats: CorrelationStats | null;
