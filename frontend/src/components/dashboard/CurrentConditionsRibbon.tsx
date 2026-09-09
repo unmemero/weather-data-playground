@@ -69,11 +69,11 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
 
   return (
     <div
-      className="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4.5 shadow-xl backdrop-blur flex flex-col gap-3"
+      className="relative z-30 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-5 sm:p-6 shadow-xl backdrop-blur flex flex-col gap-4"
       data-testid="current-conditions-ribbon"
     >
       {/* Station Title & Observation Timestamp */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2.5">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div className="flex items-center gap-2 text-xs font-mono">
           <span className="text-slate-400 uppercase tracking-wider font-semibold">
             Latest Telemetry Observation:
@@ -87,9 +87,9 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
       </div>
 
       {/* Grid of 5 Atmospheric Metrics */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
         {/* 1. Temperature & Apparent Feel */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
           <div className="flex items-center justify-between text-xs font-mono text-slate-400">
             <span className="flex items-center gap-1.5">
               <Thermometer className="w-3.5 h-3.5 text-rose-400" />
@@ -100,6 +100,8 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
               content="2m dry-bulb air temperature alongside apparent perceived temperature factoring humidity and wind chill."
               formula="T_{\text{apparent}} = T + 0.33 e - 0.70 v - 4.0"
               citation="Ahrens (2018)"
+              position="bottom"
+              align="left"
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
@@ -118,7 +120,7 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
         </div>
 
         {/* 2. Relative Humidity */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
           <div className="flex items-center justify-between text-xs font-mono text-slate-400">
             <span className="flex items-center gap-1.5">
               <Droplets className="w-3.5 h-3.5 text-sky-400" />
@@ -129,6 +131,8 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
               content="Ratio of actual vapor pressure to saturation vapor pressure at current temperature."
               formula="\text{RH} = \frac{e(T_d)}{e_s(T)} \times 100\%"
               citation="Ahrens (2018)"
+              position="bottom"
+              align="left"
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
@@ -142,7 +146,7 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
         </div>
 
         {/* 3. Surface Pressure & Tendency */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
           <div className="flex items-center justify-between text-xs font-mono text-slate-400">
             <span className="flex items-center gap-1.5">
               <Gauge className="w-3.5 h-3.5 text-purple-400" />
@@ -153,6 +157,8 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
               content="Local atmospheric weight at station surface level and 3-hour pressure trend indicative of synoptic fronts."
               formula="\Delta P = P(t) - P(t - 3\text{h})"
               citation="Holton & Hakim (2012)"
+              position="bottom"
+              align="center"
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
@@ -168,7 +174,7 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
         </div>
 
         {/* 4. Wind Speed & Vector Azimuth */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
           <div className="flex items-center justify-between text-xs font-mono text-slate-400">
             <span className="flex items-center gap-1.5">
               <Wind className="w-3.5 h-3.5 text-emerald-400" />
@@ -179,6 +185,8 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
               content="Horizontal wind flow speed and meteorological azimuth (direction from which the wind originates)."
               formula="U = -\text{spd} \cdot \sin\theta, \; V = -\text{spd} \cdot \cos\theta"
               citation="Wallace & Hobbs (2006)"
+              position="bottom"
+              align="right"
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
@@ -203,7 +211,7 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
         </div>
 
         {/* 5. Solar Radiation & UV Index */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-between">
+        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
           <div className="flex items-center justify-between text-xs font-mono text-slate-400">
             <span className="flex items-center gap-1.5">
               <Sun className="w-3.5 h-3.5 text-amber-400" />
@@ -214,6 +222,8 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
               content="Shortwave solar radiative flux at the surface driving boundary layer turbulent heat fluxes."
               formula="R_{\text{net}} = S_\downarrow (1 - \alpha) + L_{\text{net}}"
               citation="Stull (1988)"
+              position="bottom"
+              align="right"
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
