@@ -20,8 +20,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Outfit', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['Outfit', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       }
     },
   },

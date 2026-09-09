@@ -27,6 +27,7 @@ import { CitySearchModal } from './components/modals/CitySearchModal';
 import { CaseStudyModal } from './components/modals/CaseStudyModal';
 import { CsvModal } from './components/modals/CsvModal';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { AuroraParticleCanvas } from './components/common/AuroraParticleCanvas';
 import { RawDataTable } from './components/data/RawDataTable';
 import { ScatterPoint } from './types';
 
@@ -74,22 +75,28 @@ const MainLayout: React.FC = () => {
   const hasStaleStudies = caseStudies.some((c) => c.is_stale);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen atmospheric-canvas text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white relative">
+      {/* Dynamic Aurora Flow & Micro-Aerosol Stardust Canvas */}
+      <AuroraParticleCanvas />
+
       {/* 1. Header Toolbar */}
-      <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <header className="border-b border-white/[0.08] glass-panel sticky top-0 z-40 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
         {/* Brand & Subtitle */}
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 border border-cyan-500/40 rounded-xl text-cyan-400 shadow-md">
+          <div className="p-2 bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 border border-cyan-400/30 rounded-xl text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
             <CloudRain className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-lg font-bold bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-lg font-bold bg-gradient-to-r from-white via-cyan-200 to-sky-300 bg-clip-text text-transparent leading-tight tracking-tight">
               Meteorology Lab & Timeseries Workbook
             </h1>
             <p className="text-[11px] text-slate-400 font-mono flex items-center gap-2">
               <span>Interactive Atmospheric Physics Workbench</span>
               <span className="text-slate-600">•</span>
-              <span className="text-emerald-400 font-semibold">SQLite WAL Stream</span>
+              <span className="text-emerald-400 font-semibold flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                SQLite WAL Stream
+              </span>
             </p>
           </div>
         </div>
@@ -101,7 +108,7 @@ const MainLayout: React.FC = () => {
             onClick={() => setIsCityModalOpen(true)}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-medium transition-all ${
               activeLocation
-                ? 'bg-slate-900 border-slate-700 hover:border-cyan-500/60 text-slate-200'
+                ? 'bg-white/[0.04] hover:bg-white/[0.08] border-white/[0.1] hover:border-cyan-500/50 text-slate-200 shadow-sm'
                 : 'bg-rose-500/10 border-rose-500/30 text-rose-300 hover:bg-rose-500/20'
             }`}
             data-testid="station-selector-btn"
@@ -120,7 +127,7 @@ const MainLayout: React.FC = () => {
           <button
             onClick={() => syncNow()}
             disabled={isSyncing || isLoading || !activeLocation}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-xl text-xs font-semibold text-cyan-400 transition-colors disabled:opacity-40"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-xl text-xs font-semibold text-cyan-300 transition-all disabled:opacity-40 shadow-sm hover:shadow-[0_0_12px_rgba(6,182,212,0.25)]"
             title="Trigger manual hourly catch-up synchronization & retention purge"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin' : ''}`} />
@@ -130,7 +137,7 @@ const MainLayout: React.FC = () => {
           {/* Case Studies Button */}
           <button
             onClick={() => setIsCaseStudyModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-xl text-xs font-semibold text-amber-300 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-xl text-xs font-semibold text-amber-300 transition-all shadow-sm hover:shadow-[0_0_12px_rgba(245,158,11,0.2)]"
           >
             <BookOpen className="w-3.5 h-3.5" />
             <span>Case Studies</span>
@@ -149,7 +156,7 @@ const MainLayout: React.FC = () => {
           {/* CSV Portability Button */}
           <button
             onClick={() => setIsCsvModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-xl text-xs font-semibold text-emerald-300 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-xl text-xs font-semibold text-emerald-300 transition-all shadow-sm hover:shadow-[0_0_12px_rgba(16,185,129,0.2)]"
           >
             <FileSpreadsheet className="w-3.5 h-3.5" />
             <span>CSV Portability</span>
@@ -196,13 +203,13 @@ const MainLayout: React.FC = () => {
       ) : (
         <>
           {/* Navigation Tab Bar */}
-          <nav className="border-b border-slate-800 bg-slate-900/40 px-6">
+          <nav className="border-b border-white/[0.08] glass-panel-subtle px-6 sticky top-[69px] z-30">
             <div className="max-w-7xl mx-auto flex gap-6">
               <button
                 onClick={() => setActiveTab('timeseries')}
-                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-colors ${
+                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-all ${
                   activeTab === 'timeseries'
-                    ? 'border-cyan-400 text-cyan-300'
+                    ? 'border-cyan-400 text-cyan-300 shadow-[0_1px_10px_rgba(6,182,212,0.4)]'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -212,9 +219,9 @@ const MainLayout: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('correlation')}
-                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-colors ${
+                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-all ${
                   activeTab === 'correlation'
-                    ? 'border-cyan-400 text-cyan-300'
+                    ? 'border-cyan-400 text-cyan-300 shadow-[0_1px_10px_rgba(6,182,212,0.4)]'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -224,9 +231,9 @@ const MainLayout: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('wind')}
-                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-colors ${
+                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-all ${
                   activeTab === 'wind'
-                    ? 'border-cyan-400 text-cyan-300'
+                    ? 'border-cyan-400 text-cyan-300 shadow-[0_1px_10px_rgba(6,182,212,0.4)]'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -236,9 +243,9 @@ const MainLayout: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('education')}
-                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-colors ${
+                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-all ${
                   activeTab === 'education'
-                    ? 'border-cyan-400 text-cyan-300'
+                    ? 'border-cyan-400 text-cyan-300 shadow-[0_1px_10px_rgba(6,182,212,0.4)]'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -248,9 +255,9 @@ const MainLayout: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('data')}
-                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-colors ${
+                className={`py-3 text-xs font-mono font-semibold flex items-center gap-2 border-b-2 transition-all ${
                   activeTab === 'data'
-                    ? 'border-cyan-400 text-cyan-300'
+                    ? 'border-cyan-400 text-cyan-300 shadow-[0_1px_10px_rgba(6,182,212,0.4)]'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -289,7 +296,7 @@ const MainLayout: React.FC = () => {
             {activeTab === 'correlation' && (
               <div className="flex flex-col gap-6 animate-in fade-in duration-200">
                 {/* Metric Variable Pickers */}
-                <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+                <div className="glass-panel-subtle rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-4 text-xs font-mono">
                     <span className="text-slate-400 uppercase tracking-wider font-semibold">
                       Correlation Variables:
@@ -390,9 +397,43 @@ const MainLayout: React.FC = () => {
       )}
 
       {/* 5. Footer */}
-      <footer className="border-t border-slate-800 bg-slate-900/60 px-6 py-4 mt-auto text-xs text-slate-500 font-mono flex flex-wrap items-center justify-between gap-4">
-        <div>
-          Meteorology Lab & Timeseries Workbook • Open-Meteo Reanalysis & Ingestion Pipeline
+      <footer className="border-t border-white/[0.08] glass-panel-subtle px-6 py-4 mt-auto text-xs text-slate-500 font-mono flex flex-wrap items-center justify-between gap-4 relative z-10">
+        <div className="flex flex-wrap items-center gap-2 text-[11px]">
+          <span className="text-slate-400">Meteorology Lab Workbook</span>
+          <span>•</span>
+          <span>
+            Data: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer" className="text-cyan-400/80 hover:text-cyan-300 underline underline-offset-2">Open-Meteo</a>
+          </span>
+          <span>•</span>
+          <span>
+            UI based on{' '}
+            <a
+              href="https://codepen.io/gestok/pen/YzLBVOp"
+              target="_blank"
+              rel="noreferrer"
+              className="text-slate-400 hover:text-slate-200 underline underline-offset-2"
+            >
+              Glassmorphism (George Chond)
+            </a>
+            ,{' '}
+            <a
+              href="https://codepen.io/Ahmod-Musa/pen/emNqPQd"
+              target="_blank"
+              rel="noreferrer"
+              className="text-slate-400 hover:text-slate-200 underline underline-offset-2"
+            >
+              Aurora (Ahmod Musa)
+            </a>
+            {' & '}
+            <a
+              href="https://codepen.io/TheMOZZARELLA/pen/ZYzpWPw"
+              target="_blank"
+              rel="noreferrer"
+              className="text-slate-400 hover:text-slate-200 underline underline-offset-2"
+            >
+              Particles (TheMOZZARELLA)
+            </a>
+          </span>
         </div>
         <div className="flex items-center gap-4 text-[11px]">
           <span>Retention: 2-Year Rolling Cap</span>

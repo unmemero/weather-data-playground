@@ -69,31 +69,34 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
 
   return (
     <div
-      className="relative z-30 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-5 sm:p-6 shadow-xl backdrop-blur flex flex-col gap-4"
+      className="relative z-30 glass-panel rounded-2xl p-5 sm:p-6 shadow-2xl flex flex-col gap-4"
       data-testid="current-conditions-ribbon"
     >
       {/* Station Title & Observation Timestamp */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2 text-xs font-mono">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.08] pb-3">
+        <div className="flex items-center gap-2.5 text-xs font-mono">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
           <span className="text-slate-400 uppercase tracking-wider font-semibold">
             Latest Telemetry Observation:
           </span>
-          <span className="text-cyan-300 font-bold">{cityName || 'Active Station'}</span>
+          <span className="text-cyan-300 font-bold px-2 py-0.5 rounded-md bg-cyan-950/40 border border-cyan-500/20">
+            {cityName || 'Active Station'}
+          </span>
           {timezone && <span className="text-slate-500">({timezone})</span>}
         </div>
         <div className="text-[11px] font-mono text-slate-400">
-          Timestamp: <b className="text-slate-200">{latest.time_iso.replace('T', ' ')}</b>
+          Observation Epoch: <b className="text-slate-200">{latest.time_iso.replace('T', ' ')}</b>
         </div>
       </div>
 
       {/* Grid of 5 Atmospheric Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
-        {/* 1. Temperature & Apparent Feel */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
-          <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span className="flex items-center gap-1.5">
-              <Thermometer className="w-3.5 h-3.5 text-rose-400" />
-              <span>Ambient Temp</span>
+        {/* 1. Temperature & Apparent Feel - Thermal Orange (#ff5e36) */}
+        <div className="glass-card-interactive rounded-xl p-4 flex flex-col justify-between min-h-[124px] group">
+          <div className="flex items-center justify-between text-xs text-slate-400">
+            <span className="flex items-center gap-1.5 text-orange-400">
+              <Thermometer className="w-3.5 h-3.5 text-[#ff5e36]" />
+              <span className="font-medium text-slate-300">Ambient Temp</span>
             </span>
             <ScientificTooltip
               title="Ambient & Apparent Temperature"
@@ -105,26 +108,27 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold font-mono text-slate-100">
+            <span className="text-2xl font-bold text-white group-hover:text-[#ff5e36] transition-colors">
               {latest.temperature_2m !== null ? `${latest.temperature_2m.toFixed(1)}°C` : 'N/A'}
             </span>
             {latest.apparent_temperature !== null && (
-              <span className="text-xs font-mono text-slate-400">
+              <span className="text-xs text-slate-400">
                 Feels {latest.apparent_temperature.toFixed(1)}°C
               </span>
             )}
           </div>
-          <div className="mt-1 text-[10px] font-mono text-slate-500">
-            Dewpoint: {latest.dewpoint_2m !== null ? `${latest.dewpoint_2m.toFixed(1)}°C` : 'N/A'}
+          <div className="mt-1 text-[11px] text-slate-400 flex items-center justify-between">
+            <span>Dewpoint:</span>
+            <span className="text-slate-300 font-medium">{latest.dewpoint_2m !== null ? `${latest.dewpoint_2m.toFixed(1)}°C` : 'N/A'}</span>
           </div>
         </div>
 
-        {/* 2. Relative Humidity */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
-          <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span className="flex items-center gap-1.5">
-              <Droplets className="w-3.5 h-3.5 text-sky-400" />
-              <span>Relative Humidity</span>
+        {/* 2. Relative Humidity - Aqua Blue (#00b0ff) */}
+        <div className="glass-card-interactive rounded-xl p-4 flex flex-col justify-between min-h-[124px] group">
+          <div className="flex items-center justify-between text-xs text-slate-400">
+            <span className="flex items-center gap-1.5 text-cyan-400">
+              <Droplets className="w-3.5 h-3.5 text-[#00b0ff]" />
+              <span className="font-medium text-slate-300">Relative Humidity</span>
             </span>
             <ScientificTooltip
               title="Relative Humidity (RH)"
@@ -136,21 +140,22 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold font-mono text-sky-400">
+            <span className="text-2xl font-bold text-[#00b0ff] group-hover:text-cyan-300 transition-colors">
               {latest.relative_humidity !== null ? `${Math.round(latest.relative_humidity)}%` : 'N/A'}
             </span>
           </div>
-          <div className="mt-1 text-[10px] font-mono text-slate-400">
-            Status: <span className="text-slate-300 font-semibold">{getHumidityCategory(latest.relative_humidity)}</span>
+          <div className="mt-1 text-[11px] text-slate-400 flex items-center justify-between">
+            <span>Vapor State:</span>
+            <span className="text-cyan-300 font-medium">{getHumidityCategory(latest.relative_humidity)}</span>
           </div>
         </div>
 
-        {/* 3. Surface Pressure & Tendency */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
-          <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span className="flex items-center gap-1.5">
-              <Gauge className="w-3.5 h-3.5 text-purple-400" />
-              <span>Surface Pressure</span>
+        {/* 3. Surface Pressure & Tendency - Pressure Green (#00e676) */}
+        <div className="glass-card-interactive rounded-xl p-4 flex flex-col justify-between min-h-[124px] group">
+          <div className="flex items-center justify-between text-xs text-slate-400">
+            <span className="flex items-center gap-1.5 text-emerald-400">
+              <Gauge className="w-3.5 h-3.5 text-[#00e676]" />
+              <span className="font-medium text-slate-300">Surface Pressure</span>
             </span>
             <ScientificTooltip
               title="Barometric Pressure & Tendency"
@@ -162,23 +167,25 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold font-mono text-slate-100">
+            <span className="text-2xl font-bold text-white group-hover:text-[#00e676] transition-colors">
               {latest.surface_pressure !== null ? `${latest.surface_pressure.toFixed(1)}` : 'N/A'}
             </span>
-            <span className="text-xs font-mono text-slate-500">hPa</span>
+            <span className="text-xs text-slate-400">hPa</span>
           </div>
-          <div className="mt-1 text-[10px] font-mono text-slate-400 flex items-center gap-1">
-            {getPressureTendencyIcon(deltaP)}
-            <span>{getPressureTendencyText(deltaP)}</span>
+          <div className="mt-1 text-[11px] text-slate-400 flex items-center gap-1 justify-between">
+            <span className="flex items-center gap-1">
+              {getPressureTendencyIcon(deltaP)}
+              <span>{getPressureTendencyText(deltaP)}</span>
+            </span>
           </div>
         </div>
 
-        {/* 4. Wind Speed & Vector Azimuth */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
-          <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span className="flex items-center gap-1.5">
-              <Wind className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Wind Velocity</span>
+        {/* 4. Wind Speed & Vector Azimuth - Anemometer Yellow (#ffd600) */}
+        <div className="glass-card-interactive rounded-xl p-4 flex flex-col justify-between min-h-[124px] group">
+          <div className="flex items-center justify-between text-xs text-slate-400">
+            <span className="flex items-center gap-1.5 text-amber-300">
+              <Wind className="w-3.5 h-3.5 text-[#ffd600]" />
+              <span className="font-medium text-slate-300">Wind Velocity</span>
             </span>
             <ScientificTooltip
               title="10m Wind Speed & Azimuth Vector"
@@ -190,32 +197,35 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold font-mono text-emerald-400">
+            <span className="text-2xl font-bold text-[#ffd600] group-hover:text-amber-200 transition-colors">
               {latest.wind_speed_10m !== null ? `${latest.wind_speed_10m.toFixed(1)}` : 'N/A'}
             </span>
-            <span className="text-xs font-mono text-slate-500">km/h</span>
+            <span className="text-xs text-slate-400">km/h</span>
           </div>
-          <div className="mt-1 text-[10px] font-mono text-slate-400 flex items-center gap-1.5">
-            {latest.wind_direction_10m !== null && (
-              <Navigation
-                className="w-3 h-3 text-emerald-400"
-                style={{ transform: `rotate(${latest.wind_direction_10m}deg)` }}
-              />
-            )}
-            <span>
-              {getCardinalDirection(latest.wind_direction_10m)} (
+          <div className="mt-1 text-[11px] text-slate-400 flex items-center justify-between">
+            <span className="flex items-center gap-1.5">
+              {latest.wind_direction_10m !== null && (
+                <Navigation
+                  className="w-3 h-3 text-[#ffd600]"
+                  style={{ transform: `rotate(${latest.wind_direction_10m}deg)` }}
+                />
+              )}
+              <span>
+                {getCardinalDirection(latest.wind_direction_10m)}
+              </span>
+            </span>
+            <span className="text-amber-200 font-medium">
               {latest.wind_direction_10m !== null ? `${Math.round(latest.wind_direction_10m)}°` : 'N/A'}
-              )
             </span>
           </div>
         </div>
 
-        {/* 5. Solar Radiation & UV Index */}
-        <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between min-h-[120px] hover:border-slate-700/80 transition-colors">
-          <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span className="flex items-center gap-1.5">
-              <Sun className="w-3.5 h-3.5 text-amber-400" />
-              <span>Solar Forcing</span>
+        {/* 5. Solar Radiation & UV Index - Solar Orange (#ff9100) */}
+        <div className="glass-card-interactive rounded-xl p-4 flex flex-col justify-between min-h-[124px] group">
+          <div className="flex items-center justify-between text-xs text-slate-400">
+            <span className="flex items-center gap-1.5 text-amber-400">
+              <Sun className="w-3.5 h-3.5 text-[#ff9100]" />
+              <span className="font-medium text-slate-300">Solar Forcing</span>
             </span>
             <ScientificTooltip
               title="Global Horizontal Solar Irradiance"
@@ -227,13 +237,14 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
             />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold font-mono text-amber-400">
+            <span className="text-2xl font-bold text-[#ff9100] group-hover:text-amber-300 transition-colors">
               {latest.shortwave_radiation !== null ? `${Math.round(latest.shortwave_radiation)}` : '0'}
             </span>
-            <span className="text-xs font-mono text-slate-500">W/m²</span>
+            <span className="text-xs text-slate-400">W/m²</span>
           </div>
-          <div className="mt-1 text-[10px] font-mono text-slate-400">
-            UV Index: <span className="text-amber-300 font-semibold">{latest.uv_index !== null ? latest.uv_index.toFixed(1) : '0.0'}</span>
+          <div className="mt-1 text-[11px] text-slate-400 flex items-center justify-between">
+            <span>UV Index:</span>
+            <span className="text-amber-300 font-medium">{latest.uv_index !== null ? latest.uv_index.toFixed(1) : '0.0'}</span>
           </div>
         </div>
       </div>

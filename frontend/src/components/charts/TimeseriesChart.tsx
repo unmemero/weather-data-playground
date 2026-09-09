@@ -27,56 +27,56 @@ export const METRIC_CONFIGS: Record<MetricKey, MetricConfig> = {
   temperature_2m: {
     label: 'Temperature (2m)',
     unit: '°C',
-    color: '#f43f5e', // Rose
-    bgFill: 'rgba(244, 63, 94, 0.05)',
+    color: '#ff5e36', // Neon Thermal Orange
+    bgFill: 'rgba(255, 94, 54, 0.08)',
   },
   apparent_temperature: {
     label: 'Apparent Temp (Heat Index/Wind Chill)',
     unit: '°C',
-    color: '#fb7185',
-    bgFill: 'rgba(251, 113, 133, 0.05)',
+    color: '#ff8a65',
+    bgFill: 'rgba(255, 138, 101, 0.08)',
   },
   dewpoint_2m: {
     label: 'Dewpoint (2m)',
     unit: '°C',
-    color: '#06b6d4', // Cyan
-    bgFill: 'rgba(6, 182, 212, 0.05)',
+    color: '#00e5ff', // Electric Cyan
+    bgFill: 'rgba(0, 229, 255, 0.08)',
   },
   relative_humidity: {
     label: 'Relative Humidity',
     unit: '%',
-    color: '#38bdf8', // Sky
-    bgFill: 'rgba(56, 189, 248, 0.05)',
+    color: '#00b0ff', // Neon Aqua Blue
+    bgFill: 'rgba(0, 176, 255, 0.08)',
   },
   surface_pressure: {
     label: 'Surface Pressure',
     unit: 'hPa',
-    color: '#a855f7', // Purple
-    bgFill: 'rgba(168, 85, 247, 0.05)',
+    color: '#00e676', // Neon Pressure Green
+    bgFill: 'rgba(0, 230, 118, 0.08)',
   },
   wind_speed_10m: {
     label: 'Wind Speed (10m)',
     unit: 'km/h',
-    color: '#10b981', // Emerald
-    bgFill: 'rgba(16, 185, 129, 0.05)',
+    color: '#ffd600', // Neon Anemometer Yellow
+    bgFill: 'rgba(255, 214, 0, 0.08)',
   },
   shortwave_radiation: {
     label: 'Solar Radiation (GHI)',
     unit: 'W/m²',
-    color: '#f59e0b', // Amber
-    bgFill: 'rgba(245, 158, 11, 0.05)',
+    color: '#ff9100', // Neon Solar Orange
+    bgFill: 'rgba(255, 145, 0, 0.08)',
   },
   precipitation: {
     label: 'Precipitation Rate',
     unit: 'mm',
-    color: '#3b82f6', // Blue
-    bgFill: 'rgba(59, 130, 246, 0.05)',
+    color: '#7c4dff', // Electric Violet
+    bgFill: 'rgba(124, 77, 255, 0.08)',
   },
   soil_temperature_0_to_7cm: {
     label: 'Soil Temperature (0-7cm)',
     unit: '°C',
-    color: '#d97706',
-    bgFill: 'rgba(217, 119, 6, 0.05)',
+    color: '#10b981', // Earth Emerald
+    bgFill: 'rgba(16, 185, 129, 0.08)',
   },
 };
 

@@ -83,3 +83,26 @@ This document compiles the scientific literature, pedagogical models, and API do
 ### B. NOAA Data Inquiry Framework
 *   **Concept:** Guiding students from simple timeseries observations to multi-variable correlation and anomaly detection using stepped inquiry levels.
 *   **Reference:** National Oceanic and Atmospheric Administration (NOAA) Education. (2023). *Data in the Classroom: Atmospheric and Weather Patterns*. U.S. Department of Commerce. [https://dataintheclassroom.noaa.gov](https://dataintheclassroom.noaa.gov)
+
+---
+
+## 🎨 4. UI/UX Design System & CodePen Inspirations
+
+The visual architecture, atmospheric animations, and glassmorphic workbench layout are informed by and adapted from open-source creative developers on CodePen:
+
+1. **Aurora Borealis CSS Flow:**
+   * **Author:** Ahmod Musa
+   * **Work:** *CSS Aurora Background Animation — Northern Lights Effect*
+   * **Source:** [https://codepen.io/Ahmod-Musa/pen/emNqPQd](https://codepen.io/Ahmod-Musa/pen/emNqPQd)
+   * **Application:** Multi-wave blurred atmospheric gradient flow representing upper-atmosphere ionospheric physics.
+
+2. **Twinkling Particle System (Micro-Aerosols):**
+   * **Author:** TheMOZZARELLA
+   * **Work:** *Dynamic Twinkling Particle System*
+   * **Source:** [https://codepen.io/TheMOZZARELLA/pen/ZYzpWPw](https://codepen.io/TheMOZZARELLA/pen/ZYzpWPw)
+   * **Application:** Lightweight canvas particulate scattering simulating atmospheric aerosol optical scattering.
+
+3. **Glassmorphic Telemetry & Workbench Architecture:**
+   * **Authors:** George Chond ([Glassmorphism Dashboard](https://codepen.io/gestok/pen/YzLBVOp)) & Sajid Farid ([SaaS Bento Dashboard](https://codepen.io/Sajid-Farid/pen/ogzbxme))
+   * **Application:** Dark obsidian slate layout, specular top-edge sheens, and frosted glass telemetry instrument cards.
+
