@@ -80,8 +80,8 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
       <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/80">
-          <div className="flex items-center gap-2 text-amber-400 font-semibold">
-            <BookOpen className="w-5 h-5" />
+          <div className="flex items-center gap-2.5 text-[#feca57] font-bold">
+            <BookOpen className="w-5 h-5 text-[#feca57]" />
             <h2 className="text-base text-slate-100 font-bold">
               Synoptic Case Studies & Historical Archives
             </h2>
@@ -97,14 +97,14 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
         <div className="p-6 flex flex-col gap-6 overflow-y-auto">
           {/* Active Overlay Status */}
           {selectedSeriesId && (
-            <div className="flex items-center justify-between p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl">
-              <div className="flex items-center gap-2 text-xs text-amber-300 font-mono">
-                <CheckCircle className="w-4 h-4 text-amber-400" />
-                <span>Currently Viewing Historical Case Study: <b>{selectedSeriesId}</b></span>
+            <div className="flex items-center justify-between p-3 bg-[#feca57]/10 border border-[#feca57]/30 rounded-xl">
+              <div className="flex items-center gap-2 text-xs text-[#feca57] font-mono">
+                <CheckCircle className="w-4 h-4 text-[#feca57]" />
+                <span>Currently Viewing Historical Case Study: <b className="text-white">{selectedSeriesId}</b></span>
               </div>
               <button
                 onClick={() => selectSeries(null)}
-                className="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs rounded-lg font-medium transition-colors"
+                className="px-2.5 py-1 bg-[#feca57]/20 hover:bg-[#feca57]/30 text-[#feca57] text-xs rounded-lg font-semibold transition-colors border border-[#feca57]/40"
               >
                 Return to Live Stream
               </button>
@@ -133,7 +133,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
                       key={study.series_id}
                       className={`flex items-center justify-between p-3.5 rounded-xl border transition-all ${
                         isSelected
-                          ? 'bg-amber-950/20 border-amber-500/50 shadow-inner'
+                          ? 'bg-[#feca57]/10 border-[#feca57]/50 shadow-inner'
                           : 'bg-slate-950/50 border-slate-800 hover:border-slate-700'
                       }`}
                     >
@@ -141,7 +141,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
                         <div className="text-sm font-semibold text-slate-200 flex items-center gap-2">
                           <span>{study.series_id}</span>
                           {study.is_stale && (
-                            <span className="flex items-center gap-1 px-1.5 py-0.5 bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[10px] rounded font-mono">
+                            <span className="flex items-center gap-1 px-1.5 py-0.5 bg-[#ff6b6b]/10 border border-[#ff6b6b]/30 text-[#ff6b6b] text-[10px] rounded font-mono">
                               <AlertCircle className="w-3 h-3" />
                               <span>Stale &gt;30d</span>
                             </span>
@@ -152,7 +152,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
                             {startStr} – {endStr}
                           </span>
                           <span>•</span>
-                          <span className="text-amber-400">{study.record_count} hourly records</span>
+                          <span className="text-[#feca57] font-semibold">{study.record_count} hourly records</span>
                         </div>
                       </div>
 
@@ -162,9 +162,9 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
                             selectSeries(isSelected ? null : study.series_id);
                             onClose();
                           }}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                             isSelected
-                              ? 'bg-amber-500 text-slate-950 font-bold'
+                              ? 'bg-gradient-to-r from-[#feca57] to-[#ff9f43] text-slate-950 font-bold shadow-sm shadow-[#feca57]/20'
                               : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
                           }`}
                         >
@@ -172,7 +172,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
                         </button>
                         <button
                           onClick={() => deleteCaseStudy(study.series_id)}
-                          className="p-1.5 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                          className="p-1.5 text-slate-500 hover:text-[#ff6b6b] hover:bg-[#ff6b6b]/10 rounded-lg transition-colors"
                           title="Delete Case Study"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -187,8 +187,8 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
 
           {/* 2. Preset Severe Weather Case Studies */}
           <div className="flex flex-col gap-2">
-            <span className="text-xs font-mono text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
+            <span className="text-xs font-mono text-[#feca57] uppercase tracking-wider flex items-center gap-1.5 font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-[#feca57]" />
               <span>Preset Benchmark Synoptic Events</span>
             </span>
 
@@ -196,13 +196,13 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
               {PRESET_EVENTS.map((preset) => (
                 <div
                   key={preset.seriesId}
-                  className="p-3.5 bg-slate-950/60 border border-slate-800/80 hover:border-amber-500/40 rounded-xl flex items-center justify-between gap-4 transition-all"
+                  className="p-3.5 bg-slate-950/60 border border-slate-800/80 hover:border-[#feca57]/40 rounded-xl flex items-center justify-between gap-4 transition-all"
                 >
                   <div className="flex flex-col gap-1">
                     <div className="text-sm font-semibold text-slate-200">{preset.title}</div>
                     <p className="text-xs text-slate-400 leading-relaxed">{preset.description}</p>
                     <div className="text-[11px] text-slate-500 font-mono flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
+                      <Calendar className="w-3 h-3 text-slate-400" />
                       <span>
                         {preset.startDate} to {preset.endDate}
                       </span>
@@ -214,7 +214,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
                       handleDownload(preset.seriesId, preset.startDate, preset.endDate)
                     }
                     disabled={isLoading}
-                    className="flex items-center gap-1.5 px-3 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors disabled:opacity-50"
+                    className="flex items-center gap-1.5 px-3.5 py-2 bg-[#feca57]/10 hover:bg-[#feca57]/20 text-[#feca57] border border-[#feca57]/30 hover:border-[#feca57]/50 rounded-xl text-xs font-semibold whitespace-nowrap transition-all shadow-sm hover:shadow-[0_0_12px_rgba(254,202,87,0.2)] disabled:opacity-50"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>Download ERA5</span>
@@ -236,27 +236,27 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
                 placeholder="Series ID (e.g. storm_2020)"
                 value={seriesId}
                 onChange={(e) => setSeriesId(e.target.value)}
-                className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#feca57] transition-colors"
                 required
               />
               <input
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500"
+                className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-[#feca57] transition-colors"
                 required
               />
               <input
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500"
+                className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-[#feca57] transition-colors"
                 required
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex items-center justify-center gap-1 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs transition-colors disabled:opacity-50"
+                className="flex items-center justify-center gap-1.5 px-4 py-2 bg-gradient-to-r from-[#feca57] to-[#ff9f43] hover:brightness-110 text-slate-950 font-bold rounded-xl text-xs transition-all shadow-lg shadow-[#feca57]/20 active:scale-[0.98] disabled:opacity-50"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Fetch Event</span>
@@ -264,7 +264,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ isOpen, onClose 
             </form>
 
             {downloadError && (
-              <div className="text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-lg p-2.5">
+              <div className="text-xs text-[#ff6b6b] bg-[#ff6b6b]/10 border border-[#ff6b6b]/20 rounded-lg p-2.5">
                 {downloadError}
               </div>
             )}

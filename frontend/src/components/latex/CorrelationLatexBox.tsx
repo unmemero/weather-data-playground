@@ -57,14 +57,14 @@ export const CorrelationLatexBox: React.FC<CorrelationLatexBoxProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <div className="flex items-center gap-2">
-          <Activity className="w-4 h-4 text-cyan-400" />
+          <Activity className="w-4 h-4 text-[#0abde3]" />
           <span className="text-sm font-semibold text-slate-200">
             Mathematical Formulation & Decomposition
           </span>
         </div>
         <div className="flex items-center gap-2 text-xs">
           <span className="text-slate-400">Sample Size:</span>
-          <span className="font-mono text-cyan-300 font-medium">n = {stats.sample_size}</span>
+          <span className="font-mono text-[#48dbfb] font-medium">n = {stats.sample_size}</span>
         </div>
       </div>
 
@@ -97,18 +97,18 @@ export const CorrelationLatexBox: React.FC<CorrelationLatexBoxProps> = ({
         <div
           className={`border rounded-lg p-3 flex flex-col gap-1.5 transition-all duration-200 ${
             hoverMetrics
-              ? 'bg-cyan-950/20 border-cyan-500/40 shadow-inner'
+              ? 'bg-[#0abde3]/10 border-[#0abde3]/40 shadow-inner'
               : 'bg-slate-950/40 border-slate-800/80'
           }`}
           data-testid="hover-latex-box"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span className="text-xs font-mono text-[#48dbfb] uppercase tracking-wider flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Point Co-Variation Inspection</span>
             </span>
             {hoverMetrics && (
-              <span className="text-[10px] font-mono px-1.5 py-0.5 bg-cyan-500/20 text-cyan-300 rounded">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 bg-[#0abde3]/20 text-[#48dbfb] rounded">
                 Hover Active
               </span>
             )}
@@ -118,7 +118,7 @@ export const CorrelationLatexBox: React.FC<CorrelationLatexBoxProps> = ({
             <div className="flex flex-col gap-1 text-xs font-mono">
               <div className="text-slate-300">
                 <span className="text-slate-400">Observed: </span>
-                <span className="text-cyan-300 font-semibold">
+                <span className="text-[#48dbfb] font-semibold">
                   ({xLabel}: {hoverMetrics.x}, {yLabel}: {hoverMetrics.y})
                 </span>
               </div>
@@ -133,7 +133,7 @@ export const CorrelationLatexBox: React.FC<CorrelationLatexBoxProps> = ({
                   Model <LatexRenderer formula="\hat{Y}" />: <b className="text-slate-200">{hoverMetrics.predictedY}</b>
                 </span>
                 <span>
-                  Residual <LatexRenderer formula="\epsilon" />: <b className={hoverMetrics.residual >= 0 ? 'text-emerald-400' : 'text-rose-400'}>{hoverMetrics.residual}</b>
+                  Residual <LatexRenderer formula="\epsilon" />: <b className={hoverMetrics.residual >= 0 ? 'text-[#2ed573]' : 'text-[#ff6b6b]'}>{hoverMetrics.residual}</b>
                 </span>
               </div>
             </div>

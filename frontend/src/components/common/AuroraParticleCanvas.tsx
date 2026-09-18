@@ -49,9 +49,10 @@ export const AuroraParticleCanvas: React.FC = () => {
     const particles: Particle[] = [];
     const colors = [
       'rgba(255, 255, 255,', // Neutral stardust
-      'rgba(165, 243, 252,', // Atmospheric cyan
-      'rgba(196, 181, 253,', // Soft ionospheric violet
-      'rgba(167, 243, 208,', // Aurora emerald
+      'rgba(72, 219, 251,',  // Bright Ice (#48dbfb)
+      'rgba(162, 155, 254,', // Royal Amethyst (#a29bfe)
+      'rgba(29, 209, 161,',  // Vivid Jade (#1dd1a1)
+      'rgba(254, 202, 87,',  // Marigold Amber (#feca57)
     ];
 
     for (let i = 0; i < count; i++) {
@@ -110,15 +111,15 @@ export const AuroraParticleCanvas: React.FC = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
       {/* 1. Organic Aurora Borealis Flow Layer */}
-      <div className="absolute inset-0 opacity-25 filter blur-[90px] saturate-150 transform-gpu">
-        {/* Luminous Emerald Wave */}
-        <div className="absolute -top-[15%] left-[10%] w-[55vw] h-[45vh] rounded-full bg-gradient-to-br from-emerald-500/40 via-teal-400/30 to-transparent animate-aurora-1" />
+      <div className="absolute inset-0 opacity-18 filter blur-[100px] saturate-125 transform-gpu">
+        {/* Luminous Vivid Jade Wave */}
+        <div className="absolute -top-[15%] left-[10%] w-[55vw] h-[45vh] rounded-full bg-gradient-to-br from-[#1dd1a1]/35 via-[#0abde3]/25 to-transparent animate-aurora-1" />
 
-        {/* Ionospheric Violet / Indigo Wave */}
-        <div className="absolute top-[5%] right-[5%] w-[60vw] h-[50vh] rounded-full bg-gradient-to-bl from-indigo-600/35 via-violet-500/25 to-transparent animate-aurora-2" />
+        {/* Ionospheric Royal Amethyst Wave */}
+        <div className="absolute top-[5%] right-[5%] w-[60vw] h-[50vh] rounded-full bg-gradient-to-bl from-[#a29bfe]/30 via-[#48dbfb]/20 to-transparent animate-aurora-2" />
 
-        {/* Deep Atmospheric Cyan Core */}
-        <div className="absolute top-[25%] left-[25%] w-[50vw] h-[40vh] rounded-full bg-gradient-to-tr from-cyan-500/30 via-sky-400/20 to-transparent animate-aurora-3" />
+        {/* Deep Atmospheric Cerulean & Bright Ice Core */}
+        <div className="absolute top-[25%] left-[25%] w-[50vw] h-[40vh] rounded-full bg-gradient-to-tr from-[#0abde3]/30 via-[#48dbfb]/20 to-transparent animate-aurora-3" />
       </div>
 
       {/* 2. Micro-Aerosol Twinkle Canvas */}

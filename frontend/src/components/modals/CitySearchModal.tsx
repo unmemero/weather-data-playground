@@ -55,7 +55,7 @@ export const CitySearchModal: React.FC<CitySearchModalProps> = ({ isOpen, onClos
       <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/80">
-          <div className="flex items-center gap-2 text-cyan-400 font-semibold">
+          <div className="flex items-center gap-2 text-[#48dbfb] font-semibold">
             <Globe className="w-5 h-5" />
             <h2 className="text-base text-slate-100 font-bold">Weather Station & City Profiles</h2>
           </div>
@@ -77,13 +77,13 @@ export const CitySearchModal: React.FC<CitySearchModalProps> = ({ isOpen, onClos
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search city by name (e.g. Austin, London, Tokyo)..."
-                className="w-full bg-slate-950 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                className="w-full bg-slate-950 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0abde3] transition-colors"
               />
             </div>
             <button
               type="submit"
               disabled={isSearching || !query.trim()}
-              className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold rounded-xl text-sm transition-colors disabled:opacity-50"
+              className="px-4 py-2 bg-gradient-to-r from-[#0abde3] to-[#48dbfb] hover:opacity-90 text-slate-950 font-bold rounded-xl text-sm transition-all disabled:opacity-50 shadow-sm"
             >
               {isSearching ? 'Searching...' : 'Search'}
             </button>
@@ -91,7 +91,7 @@ export const CitySearchModal: React.FC<CitySearchModalProps> = ({ isOpen, onClos
 
           {/* Search Error */}
           {searchError && (
-            <div className="text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-lg p-2.5">
+            <div className="text-xs text-[#ff6b6b] bg-[#ff6b6b]/10 border border-[#ff6b6b]/20 rounded-lg p-2.5">
               {searchError}
             </div>
           )}
@@ -99,14 +99,14 @@ export const CitySearchModal: React.FC<CitySearchModalProps> = ({ isOpen, onClos
           {/* Search Results */}
           {searchResults.length > 0 && (
             <div className="flex flex-col gap-2">
-              <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider">
+              <span className="text-xs font-mono text-[#48dbfb] uppercase tracking-wider">
                 Geocoded Matches
               </span>
               <div className="grid grid-cols-1 gap-2">
                 {searchResults.map((r, idx) => (
                   <div
                     key={`${r.name}-${r.latitude}-${idx}`}
-                    className="flex items-center justify-between p-3 bg-slate-950/60 border border-slate-800 hover:border-cyan-500/50 rounded-xl transition-all"
+                    className="flex items-center justify-between p-3 bg-slate-950/60 border border-slate-800 hover:border-[#0abde3]/50 rounded-xl transition-all"
                   >
                     <div className="flex flex-col">
                       <div className="text-sm font-semibold text-slate-200">
@@ -119,7 +119,7 @@ export const CitySearchModal: React.FC<CitySearchModalProps> = ({ isOpen, onClos
                     </div>
                     <button
                       onClick={() => handleAddNew(r)}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-lg text-xs font-medium transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 bg-[#0abde3]/10 hover:bg-[#0abde3]/20 text-[#48dbfb] border border-[#0abde3]/30 rounded-lg text-xs font-medium transition-colors"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Select & Backfill</span>
@@ -149,7 +149,7 @@ export const CitySearchModal: React.FC<CitySearchModalProps> = ({ isOpen, onClos
                       key={loc.id}
                       className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
                         isActive
-                          ? 'bg-cyan-950/20 border-cyan-500/40 shadow-inner'
+                          ? 'bg-[#0abde3]/10 border-[#0abde3]/40 shadow-inner'
                           : 'bg-slate-950/40 border-slate-800 hover:border-slate-700'
                       }`}
                     >
@@ -157,7 +157,7 @@ export const CitySearchModal: React.FC<CitySearchModalProps> = ({ isOpen, onClos
                         <div
                           className={`p-2 rounded-lg ${
                             isActive
-                              ? 'bg-cyan-500/20 text-cyan-400'
+                              ? 'bg-[#0abde3]/20 text-[#48dbfb]'
                               : 'bg-slate-800 text-slate-400'
                           }`}
                         >
@@ -168,7 +168,7 @@ export const CitySearchModal: React.FC<CitySearchModalProps> = ({ isOpen, onClos
                             <span>{loc.name}</span>
                             {loc.admin1 && <span className="text-slate-400 text-xs font-normal">({loc.admin1})</span>}
                             {isActive && (
-                              <span className="px-2 py-0.5 bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-[10px] rounded-full font-mono font-medium">
+                              <span className="px-2 py-0.5 bg-[#0abde3]/20 border border-[#0abde3]/40 text-[#48dbfb] text-[10px] rounded-full font-mono font-medium">
                                 ACTIVE
                               </span>
                             )}

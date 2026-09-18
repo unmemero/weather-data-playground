@@ -53,17 +53,17 @@ WORKDIR /app
 # Copy compiled backend binary from Stage 2
 COPY --from=backend-builder /app/backend/target/release/backend /usr/local/bin/weather-server
 
-# Copy compiled frontend assets from Stage 1
-COPY --from=frontend-builder /app/frontend/dist /app/dist
+# Copy compiled frontend assets from Stage 1 (outside /app so persistent volumes do not shadow it)
+COPY --from=frontend-builder /app/frontend/dist /var/www/dist
 
 # Set permissions for non-root runtime
-RUN chown -R weatherapp:weatherapp /app
+RUN chown -R weatherapp:weatherapp /app /var/www/dist
 
 USER weatherapp
 
 # Default Configuration
 ENV PORT=3001 \
-    STATIC_DIR=/app/dist \
+    STATIC_DIR=/var/www/dist \
     RUST_LOG=backend=info,tower_http=info
 
 EXPOSE 3001

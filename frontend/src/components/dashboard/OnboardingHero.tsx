@@ -1,6 +1,7 @@
 import React from 'react';
-import { CloudRain, Search, Sparkles, MapPin, Layers, Activity, Compass, BookOpen } from 'lucide-react';
+import { Search, Sparkles, MapPin, Layers, Activity, Compass, BookOpen } from 'lucide-react';
 import { Location } from '../../types';
+import { MeteorologyLogo } from '../common/MeteorologyLogo';
 
 interface OnboardingHeroProps {
   onOpenSearch: () => void;
@@ -66,12 +67,10 @@ export const OnboardingHero: React.FC<OnboardingHeroProps> = ({
       data-testid="onboarding-hero"
     >
       {/* Icon & Title */}
-      <div className="flex flex-col items-center gap-4">
-        <div className="p-4 bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 border border-cyan-500/40 rounded-3xl text-cyan-400 shadow-xl ring-8 ring-cyan-500/5">
-          <CloudRain className="w-12 h-12" />
-        </div>
+      <div className="flex flex-col items-center gap-5">
+        <MeteorologyLogo size={68} />
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-sky-200 to-indigo-300 bg-clip-text text-transparent">
+          <h2 className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-white via-[#48dbfb] to-[#1dd1a1] bg-clip-text text-transparent">
             Welcome to Meteorology Lab & Timeseries Workbook
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 max-w-xl leading-relaxed">
@@ -85,7 +84,7 @@ export const OnboardingHero: React.FC<OnboardingHeroProps> = ({
         <button
           onClick={onOpenSearch}
           disabled={isLoading}
-          className="flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-sky-400 hover:from-cyan-400 hover:to-sky-300 text-slate-950 font-bold rounded-2xl text-sm shadow-xl shadow-cyan-500/20 transition-all hover:scale-[1.02] disabled:opacity-50"
+          className="flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-[#0abde3] to-[#48dbfb] hover:brightness-110 text-slate-950 font-bold rounded-2xl text-sm shadow-xl shadow-[#0abde3]/25 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
         >
           <Search className="w-4 h-4" />
           <span>Search & Configure Weather Station</span>
@@ -95,7 +94,7 @@ export const OnboardingHero: React.FC<OnboardingHeroProps> = ({
       {/* Quick-Start Presets */}
       <div className="flex flex-col items-center gap-3 w-full">
         <span className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <Sparkles className="w-3.5 h-3.5 text-[#feca57]" />
           <span>Or Quick-Start With a Benchmark Station:</span>
         </span>
 
@@ -105,13 +104,13 @@ export const OnboardingHero: React.FC<OnboardingHeroProps> = ({
               key={preset.name}
               onClick={() => onSelectPreset(preset)}
               disabled={isLoading}
-              className="flex items-center gap-2.5 p-3.5 bg-slate-950/60 hover:bg-slate-900 border border-slate-800/80 hover:border-cyan-500/40 rounded-xl text-left transition-all group disabled:opacity-50"
+              className="flex items-center gap-2.5 p-3.5 bg-slate-950/60 hover:bg-slate-900 border border-slate-800/80 hover:border-[#0abde3]/40 rounded-xl text-left transition-all group disabled:opacity-50"
             >
-              <div className="p-1.5 bg-cyan-500/10 text-cyan-400 rounded-lg group-hover:bg-cyan-500/20 transition-colors">
+              <div className="p-1.5 bg-[#0abde3]/10 text-[#48dbfb] rounded-lg group-hover:bg-[#0abde3]/20 transition-colors">
                 <MapPin className="w-3.5 h-3.5" />
               </div>
               <div className="flex flex-col overflow-hidden">
-                <span className="text-xs font-semibold text-slate-200 group-hover:text-cyan-300 transition-colors truncate">
+                <span className="text-xs font-semibold text-slate-200 group-hover:text-[#48dbfb] transition-colors truncate">
                   {preset.name}
                 </span>
                 <span className="text-[10px] font-mono text-slate-500 truncate">
@@ -126,7 +125,7 @@ export const OnboardingHero: React.FC<OnboardingHeroProps> = ({
       {/* Feature Highlights Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full pt-6 border-t border-slate-800/80 text-left">
         <div className="flex flex-col gap-1 p-3 bg-slate-950/40 rounded-xl border border-slate-900">
-          <div className="flex items-center gap-1.5 text-cyan-400 text-xs font-semibold">
+          <div className="flex items-center gap-1.5 text-[#48dbfb] text-xs font-semibold">
             <Layers className="w-3.5 h-3.5" />
             <span>Dual-Y Timeseries</span>
           </div>
@@ -136,7 +135,7 @@ export const OnboardingHero: React.FC<OnboardingHeroProps> = ({
         </div>
 
         <div className="flex flex-col gap-1 p-3 bg-slate-950/40 rounded-xl border border-slate-900">
-          <div className="flex items-center gap-1.5 text-rose-400 text-xs font-semibold">
+          <div className="flex items-center gap-1.5 text-[#ff6b6b] text-xs font-semibold">
             <Activity className="w-3.5 h-3.5" />
             <span>Pearson & Regression</span>
           </div>
@@ -146,7 +145,7 @@ export const OnboardingHero: React.FC<OnboardingHeroProps> = ({
         </div>
 
         <div className="flex flex-col gap-1 p-3 bg-slate-950/40 rounded-xl border border-slate-900">
-          <div className="flex items-center gap-1.5 text-emerald-400 text-xs font-semibold">
+          <div className="flex items-center gap-1.5 text-[#1dd1a1] text-xs font-semibold">
             <Compass className="w-3.5 h-3.5" />
             <span>Polar Wind Rose</span>
           </div>
@@ -156,7 +155,7 @@ export const OnboardingHero: React.FC<OnboardingHeroProps> = ({
         </div>
 
         <div className="flex flex-col gap-1 p-3 bg-slate-950/40 rounded-xl border border-slate-900">
-          <div className="flex items-center gap-1.5 text-purple-400 text-xs font-semibold">
+          <div className="flex items-center gap-1.5 text-[#feca57] text-xs font-semibold">
             <BookOpen className="w-3.5 h-3.5" />
             <span>ERA5 Case Studies</span>
           </div>

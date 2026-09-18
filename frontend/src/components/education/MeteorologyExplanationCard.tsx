@@ -23,8 +23,8 @@ const TOPICS: Topic[] = [
     title: 'Clausius-Clapeyron & Moisture Capacity',
     category: 'Atmospheric Thermodynamics',
     icon: Thermometer,
-    color: 'text-rose-400',
-    borderColor: 'border-rose-500/30',
+    color: 'text-[#ff6b6b]',
+    borderColor: 'border-[#ff6b6b]/40',
     summary:
       'Explains the strong negative correlation (r ≈ -0.9) between Temperature and Relative Humidity during diurnal heating.',
     fullExplanation:
@@ -42,8 +42,8 @@ const TOPICS: Topic[] = [
     title: 'Kinematics & Vector Wind Averaging',
     category: 'Dynamic Meteorology',
     icon: Wind,
-    color: 'text-emerald-400',
-    borderColor: 'border-emerald-500/30',
+    color: 'text-[#1dd1a1]',
+    borderColor: 'border-[#1dd1a1]/40',
     summary:
       'Overcomes the 0°/360° modular compass singularity by decomposing wind into Cartesian U (Zonal) and V (Meridional) vectors.',
     fullExplanation:
@@ -61,8 +61,8 @@ const TOPICS: Topic[] = [
     title: 'Baroclinic Fronts & Temperature-Pressure Dipoles',
     category: 'Synoptic Meteorology',
     icon: BarChart2,
-    color: 'text-purple-400',
-    borderColor: 'border-purple-500/30',
+    color: 'text-[#a29bfe]',
+    borderColor: 'border-[#a29bfe]/40',
     summary:
       'Cold frontal passages and polar outbreaks generate a distinct inverse pressure-temperature dipole as dense arctic air surges in.',
     fullExplanation:
@@ -80,8 +80,8 @@ const TOPICS: Topic[] = [
     title: 'Solar Radiation & Boundary Layer Heat Flux',
     category: 'Planetary Boundary Layer',
     icon: Sun,
-    color: 'text-amber-400',
-    borderColor: 'border-amber-500/30',
+    color: 'text-[#feca57]',
+    borderColor: 'border-[#feca57]/40',
     summary:
       'Incoming shortwave solar irradiance drives turbulent sensible heat flux, creating the characteristic 2-hour diurnal temperature lag.',
     fullExplanation:
@@ -110,7 +110,7 @@ export const MeteorologyExplanationCard: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 bg-indigo-500/10 border border-indigo-500/30 rounded-xl text-indigo-400">
+          <div className="p-2 bg-[#0abde3]/10 border border-[#0abde3]/30 rounded-xl text-[#48dbfb]">
             <BookOpen className="w-5 h-5" />
           </div>
           <div>
@@ -165,7 +165,7 @@ export const MeteorologyExplanationCard: React.FC = () => {
             <IconComponent className={`w-5 h-5 ${currentTopic.color}`} />
             <div>
               <h3 className="text-sm font-bold text-slate-100">{currentTopic.title}</h3>
-              <span className="text-[11px] font-mono text-cyan-400">
+              <span className="text-[11px] font-mono text-[#48dbfb]">
                 Category: {currentTopic.category}
               </span>
             </div>
@@ -188,10 +188,10 @@ export const MeteorologyExplanationCard: React.FC = () => {
         </div>
 
         {/* Real-World Observation in Workbook */}
-        <div className="flex items-start gap-2.5 p-3.5 bg-cyan-950/20 border border-cyan-500/30 rounded-lg text-xs text-slate-300">
-          <ChevronRight className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+        <div className="flex items-start gap-2.5 p-3.5 bg-[#0abde3]/10 border border-[#0abde3]/30 rounded-lg text-xs text-slate-300">
+          <ChevronRight className="w-4 h-4 text-[#48dbfb] shrink-0 mt-0.5" />
           <div>
-            <b className="text-cyan-300 font-mono">Workbook Observation Link: </b>
+            <b className="text-[#48dbfb] font-mono">Workbook Observation Link: </b>
             {currentTopic.observedPhenomenon}
           </div>
         </div>

@@ -46,7 +46,7 @@ export const WindVectorLatexBox: React.FC<WindVectorLatexBoxProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <div className="flex items-center gap-2">
-          <Compass className="w-4 h-4 text-emerald-400" />
+          <Compass className="w-4 h-4 text-[#1dd1a1]" />
           <span className="text-sm font-semibold text-slate-200">
             Meteorological Vector Mathematics
           </span>
@@ -54,7 +54,7 @@ export const WindVectorLatexBox: React.FC<WindVectorLatexBoxProps> = ({
         {stats && (
           <div className="flex items-center gap-2 text-xs font-mono">
             <span className="text-slate-400">Resultant:</span>
-            <span className="text-emerald-300 font-semibold">{stats.resultant_direction}°</span>
+            <span className="text-[#1dd1a1] font-semibold">{stats.resultant_direction}°</span>
             <span className="text-slate-400">({stats.mean_speed} km/h)</span>
           </div>
         )}
@@ -91,18 +91,18 @@ export const WindVectorLatexBox: React.FC<WindVectorLatexBoxProps> = ({
       <div
         className={`border rounded-lg p-3 flex flex-col gap-1.5 transition-all duration-200 ${
           hoverVector
-            ? 'bg-emerald-950/20 border-emerald-500/40 shadow-inner'
+            ? 'bg-[#1dd1a1]/10 border-[#1dd1a1]/40 shadow-inner'
             : 'bg-slate-950/40 border-slate-800/80'
         }`}
         data-testid="wind-hover-latex-box"
       >
         <div className="flex items-center justify-between">
-          <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-            <Wind className="w-3.5 h-3.5" />
+          <span className="text-xs font-mono text-[#1dd1a1] uppercase tracking-wider flex items-center gap-1.5 font-semibold">
+            <Wind className="w-3.5 h-3.5 text-[#1dd1a1]" />
             <span>Instantaneous Observation Vector</span>
           </span>
           {hoverVector && (
-            <span className="text-[10px] font-mono px-1.5 py-0.5 bg-emerald-500/20 text-emerald-300 rounded">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 bg-[#1dd1a1]/20 text-[#1dd1a1] rounded">
               Observation Active
             </span>
           )}
@@ -112,10 +112,10 @@ export const WindVectorLatexBox: React.FC<WindVectorLatexBoxProps> = ({
           <div className="flex flex-col gap-1.5 text-xs font-mono">
             <div className="text-slate-300 flex items-center justify-between">
               <span>
-                Wind Speed: <b className="text-emerald-300">{hoverVector.speed} km/h</b>
+                Wind Speed: <b className="text-[#1dd1a1]">{hoverVector.speed} km/h</b>
               </span>
               <span>
-                Azimuth Bearing ($\theta$): <b className="text-emerald-300">{hoverVector.dir}°</b>
+                Azimuth Bearing ($\theta$): <b className="text-[#1dd1a1]">{hoverVector.dir}°</b>
               </span>
             </div>
             <div className="py-1">

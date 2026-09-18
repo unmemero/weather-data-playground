@@ -165,9 +165,9 @@ export const RawDataTable: React.FC<RawDataTableProps> = ({
       return <ArrowUpDown className="w-3 h-3 text-slate-500 opacity-60 group-hover:opacity-100 transition-opacity" />;
     }
     return sortDirection === 'asc' ? (
-      <ArrowUp className="w-3 h-3 text-cyan-400" />
+      <ArrowUp className="w-3 h-3 text-[#48dbfb]" />
     ) : (
-      <ArrowDown className="w-3 h-3 text-cyan-400" />
+      <ArrowDown className="w-3 h-3 text-[#48dbfb]" />
     );
   };
 
@@ -179,7 +179,7 @@ export const RawDataTable: React.FC<RawDataTableProps> = ({
       {/* Table Header Controls */}
       <div className="p-4 border-b border-slate-800 flex flex-wrap items-center justify-between gap-4 bg-slate-900/60">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 rounded-lg">
+          <div className="p-2 bg-[#0abde3]/10 border border-[#0abde3]/30 text-[#48dbfb] rounded-lg">
             <TableIcon className="w-4 h-4" />
           </div>
           <div>
@@ -187,12 +187,12 @@ export const RawDataTable: React.FC<RawDataTableProps> = ({
               <h2 className="text-sm font-semibold text-slate-200">Raw Observations & Telemetry</h2>
               <span
                 data-testid="record-count-badge"
-                className="text-xs px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-cyan-300 font-mono"
+                className="text-xs px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[#48dbfb] font-mono font-medium"
               >
                 {totalRecords.toLocaleString()} {totalRecords === 1 ? 'record' : 'records'}
               </span>
               {seriesId && (
-                <span className="text-xs px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/30 text-purple-300 font-mono">
+                <span className="text-xs px-2 py-0.5 rounded bg-[#a29bfe]/10 border border-[#a29bfe]/30 text-[#a29bfe] font-mono">
                   Series: {seriesId}
                 </span>
               )}
@@ -216,7 +216,7 @@ export const RawDataTable: React.FC<RawDataTableProps> = ({
                 setSearchTerm(e.target.value);
                 setCurrentPage(1);
               }}
-              className="bg-slate-950 border border-slate-700 text-slate-200 text-xs rounded-lg pl-8 pr-3 py-1.5 focus:outline-none focus:border-cyan-500 transition-colors w-48 font-mono"
+              className="bg-slate-950 border border-slate-700 text-slate-200 text-xs rounded-lg pl-8 pr-3 py-1.5 focus:outline-none focus:border-[#0abde3] transition-colors w-48 font-mono"
             />
           </div>
 
@@ -242,7 +242,7 @@ export const RawDataTable: React.FC<RawDataTableProps> = ({
           <button
             onClick={handleExportCsv}
             disabled={totalRecords === 0}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-800 disabled:text-slate-600 text-white rounded-lg text-xs font-mono font-medium transition-colors shadow-sm"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-[#0abde3] to-[#48dbfb] hover:opacity-90 disabled:bg-slate-800 disabled:text-slate-600 text-slate-950 rounded-lg text-xs font-mono font-bold transition-all shadow-sm"
             title="Download currently filtered records as CSV"
           >
             <Download className="w-3.5 h-3.5" />
@@ -375,43 +375,43 @@ export const RawDataTable: React.FC<RawDataTableProps> = ({
                   <td className="py-2 px-3 whitespace-nowrap text-slate-300 sticky left-0 bg-slate-900/95 border-r border-slate-800 font-medium">
                     {reading.time_iso.replace('T', ' ')}
                   </td>
-                  <td className="py-2 px-3 text-right whitespace-nowrap font-medium text-cyan-300">
+                  <td className="py-2 px-3 text-right whitespace-nowrap font-medium text-[#ff6b6b]">
                     {reading.temperature_2m !== null ? reading.temperature_2m.toFixed(1) : '-'}
                   </td>
                   <td className="py-2 px-3 text-right whitespace-nowrap text-slate-400">
                     {reading.apparent_temperature !== null ? reading.apparent_temperature.toFixed(1) : '-'}
                   </td>
-                  <td className="py-2 px-3 text-right whitespace-nowrap text-blue-300">
+                  <td className="py-2 px-3 text-right whitespace-nowrap text-[#48dbfb]">
                     {reading.dewpoint_2m !== null ? reading.dewpoint_2m.toFixed(1) : '-'}
                   </td>
-                  <td className="py-2 px-3 text-right whitespace-nowrap text-emerald-300">
+                  <td className="py-2 px-3 text-right whitespace-nowrap text-[#0abde3]">
                     {reading.relative_humidity !== null ? `${reading.relative_humidity}%` : '-'}
                   </td>
-                  <td className="py-2 px-3 text-right whitespace-nowrap text-amber-300">
+                  <td className="py-2 px-3 text-right whitespace-nowrap text-[#1dd1a1]">
                     {reading.surface_pressure !== null ? reading.surface_pressure.toFixed(1) : '-'}
                   </td>
-                  <td className="py-2 px-3 text-right whitespace-nowrap text-violet-300">
+                  <td className="py-2 px-3 text-right whitespace-nowrap text-[#feca57]">
                     {reading.wind_speed_10m !== null ? reading.wind_speed_10m.toFixed(1) : '-'}
                   </td>
                   <td className="py-2 px-3 text-right whitespace-nowrap text-slate-400">
                     {reading.wind_direction_10m !== null ? `${Math.round(reading.wind_direction_10m)}°` : '-'}
                   </td>
-                  <td className="py-2 px-3 text-right whitespace-nowrap text-yellow-300">
+                  <td className="py-2 px-3 text-right whitespace-nowrap text-[#ff9f43]">
                     {reading.shortwave_radiation !== null ? reading.shortwave_radiation.toFixed(0) : '-'}
                   </td>
-                  <td className="py-2 px-3 text-right whitespace-nowrap text-orange-300">
+                  <td className="py-2 px-3 text-right whitespace-nowrap text-[#feca57]">
                     {reading.uv_index !== null ? reading.uv_index.toFixed(1) : '-'}
                   </td>
-                  <td className="py-2 px-3 text-right whitespace-nowrap text-sky-400">
+                  <td className="py-2 px-3 text-right whitespace-nowrap text-[#a29bfe]">
                     {reading.precipitation !== null ? reading.precipitation.toFixed(1) : '0.0'}
                   </td>
                   <td className="py-2 px-3 text-center whitespace-nowrap">
                     {reading.source_type === 'automated' ? (
-                      <span className="px-1.5 py-0.5 text-[10px] rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                      <span className="px-2 py-0.5 text-[10px] rounded bg-[#1dd1a1]/15 border border-[#1dd1a1]/30 text-[#1dd1a1] font-medium font-mono">
                         Auto
                       </span>
                     ) : (
-                      <span className="px-1.5 py-0.5 text-[10px] rounded bg-purple-500/10 border border-purple-500/20 text-purple-300">
+                      <span className="px-2 py-0.5 text-[10px] rounded bg-[#a29bfe]/15 border border-[#a29bfe]/30 text-[#a29bfe] font-medium font-mono">
                         {reading.series_id ? `Case: ${reading.series_id}` : 'Manual'}
                       </span>
                     )}

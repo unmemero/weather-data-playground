@@ -27,56 +27,56 @@ export const METRIC_CONFIGS: Record<MetricKey, MetricConfig> = {
   temperature_2m: {
     label: 'Temperature (2m)',
     unit: '°C',
-    color: '#ff5e36', // Neon Thermal Orange
-    bgFill: 'rgba(255, 94, 54, 0.08)',
+    color: '#ff6b6b', // Molten Coral
+    bgFill: 'rgba(255, 107, 107, 0.09)',
   },
   apparent_temperature: {
     label: 'Apparent Temp (Heat Index/Wind Chill)',
     unit: '°C',
-    color: '#ff8a65',
-    bgFill: 'rgba(255, 138, 101, 0.08)',
+    color: '#ff9f43', // Warm Apricot
+    bgFill: 'rgba(255, 159, 67, 0.09)',
   },
   dewpoint_2m: {
     label: 'Dewpoint (2m)',
     unit: '°C',
-    color: '#00e5ff', // Electric Cyan
-    bgFill: 'rgba(0, 229, 255, 0.08)',
+    color: '#48dbfb', // Bright Ice
+    bgFill: 'rgba(72, 219, 251, 0.09)',
   },
   relative_humidity: {
     label: 'Relative Humidity',
     unit: '%',
-    color: '#00b0ff', // Neon Aqua Blue
-    bgFill: 'rgba(0, 176, 255, 0.08)',
+    color: '#0abde3', // Cerulean Blue
+    bgFill: 'rgba(10, 189, 227, 0.09)',
   },
   surface_pressure: {
     label: 'Surface Pressure',
     unit: 'hPa',
-    color: '#00e676', // Neon Pressure Green
-    bgFill: 'rgba(0, 230, 118, 0.08)',
+    color: '#1dd1a1', // Vivid Jade
+    bgFill: 'rgba(29, 209, 161, 0.09)',
   },
   wind_speed_10m: {
     label: 'Wind Speed (10m)',
     unit: 'km/h',
-    color: '#ffd600', // Neon Anemometer Yellow
-    bgFill: 'rgba(255, 214, 0, 0.08)',
+    color: '#feca57', // Marigold Amber
+    bgFill: 'rgba(254, 202, 87, 0.09)',
   },
   shortwave_radiation: {
     label: 'Solar Radiation (GHI)',
     unit: 'W/m²',
-    color: '#ff9100', // Neon Solar Orange
-    bgFill: 'rgba(255, 145, 0, 0.08)',
+    color: '#ff9f43', // Sunburst Orange
+    bgFill: 'rgba(255, 159, 67, 0.09)',
   },
   precipitation: {
     label: 'Precipitation Rate',
     unit: 'mm',
-    color: '#7c4dff', // Electric Violet
-    bgFill: 'rgba(124, 77, 255, 0.08)',
+    color: '#a29bfe', // Royal Amethyst
+    bgFill: 'rgba(162, 155, 254, 0.09)',
   },
   soil_temperature_0_to_7cm: {
     label: 'Soil Temperature (0-7cm)',
     unit: '°C',
-    color: '#10b981', // Earth Emerald
-    bgFill: 'rgba(16, 185, 129, 0.08)',
+    color: '#2ed573', // Fresh Lime-Mint
+    bgFill: 'rgba(46, 213, 115, 0.09)',
   },
 };
 
@@ -156,7 +156,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
       datasets.push({
         label: `SMA (${smaWindow}h) Smoothed`,
         data: smoothedData.map((s) => s.smoothed_value),
-        borderColor: '#fbbf24', // Amber gold
+        borderColor: '#feca57', // Marigold Amber
         yAxisID: 'yLeft',
         borderWidth: 2.5,
         pointRadius: 0,
@@ -241,13 +241,13 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
         <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
           <div className="flex items-center gap-1.5 bg-slate-950/80 border border-slate-700/80 rounded-lg px-2.5 py-1.5">
             <span className="text-slate-400 flex items-center gap-1">
-              <Layers className="w-3.5 h-3.5 text-rose-400" />
+              <Layers className="w-3.5 h-3.5 text-[#ff6b6b]" />
               <span>Left Y:</span>
             </span>
             <select
               value={primaryMetric}
               onChange={(e) => setPrimaryMetric(e.target.value as MetricKey)}
-              className="bg-transparent text-rose-300 font-semibold outline-none cursor-pointer"
+              className="bg-transparent text-[#ff6b6b] font-semibold outline-none cursor-pointer"
             >
               {Object.entries(METRIC_CONFIGS).map(([k, v]) => (
                 <option key={k} value={k} className="bg-slate-900 text-slate-200">
@@ -259,13 +259,13 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
 
           <div className="flex items-center gap-1.5 bg-slate-950/80 border border-slate-700/80 rounded-lg px-2.5 py-1.5">
             <span className="text-slate-400 flex items-center gap-1">
-              <Layers className="w-3.5 h-3.5 text-sky-400" />
+              <Layers className="w-3.5 h-3.5 text-[#0abde3]" />
               <span>Right Y:</span>
             </span>
             <select
               value={secondaryMetric}
               onChange={(e) => setSecondaryMetric(e.target.value as MetricKey | 'none')}
-              className="bg-transparent text-sky-300 font-semibold outline-none cursor-pointer"
+              className="bg-transparent text-[#48dbfb] font-semibold outline-none cursor-pointer"
             >
               <option value="none" className="bg-slate-900 text-slate-400">
                 (Disabled)
@@ -283,7 +283,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
             <button
               onClick={() => setShowSMA(!showSMA)}
               className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-medium transition-colors ${
-                showSMA ? 'bg-amber-500/20 text-amber-300' : 'text-slate-500 hover:text-slate-400'
+                showSMA ? 'bg-[#feca57]/20 text-[#feca57]' : 'text-slate-500 hover:text-slate-400'
               }`}
             >
               <Eye className="w-3 h-3" />
@@ -293,7 +293,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
               <select
                 value={smaWindow}
                 onChange={(e) => setSmaWindow(parseInt(e.target.value, 10))}
-                className="bg-slate-900 text-amber-300 text-[11px] rounded px-1.5 py-0.5 outline-none cursor-pointer"
+                className="bg-slate-900 text-[#feca57] text-[11px] rounded px-1.5 py-0.5 outline-none cursor-pointer"
               >
                 <option value={3}>3h</option>
                 <option value={6}>6h</option>
@@ -313,9 +313,9 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
               <button
                 key={r}
                 onClick={() => onRangeChange(r)}
-                className={`px-2 py-1 rounded text-xs font-mono transition-colors ${
+                className={`px-2 py-1 rounded text-xs font-mono transition-all ${
                   selectedRange === r
-                    ? 'bg-cyan-500 text-slate-950 font-bold shadow'
+                    ? 'bg-gradient-to-r from-[#0abde3] to-[#48dbfb] text-slate-950 font-bold shadow-[0_0_12px_rgba(10,189,227,0.4)]'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
                 }`}
               >

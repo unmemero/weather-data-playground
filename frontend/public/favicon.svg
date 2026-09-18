@@ -1,0 +1,28 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="vortexGradient1" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#48dbfb" />
+      <stop offset="50%" stopColor="#0abde3" />
+      <stop offset="100%" stopColor="#1dd1a1" />
+    </linearGradient>
+    <linearGradient id="contourGradient" x1="10" y1="38" x2="38" y2="10" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#1dd1a1" />
+      <stop offset="60%" stopColor="#0abde3" />
+      <stop offset="100%" stopColor="#48dbfb" />
+    </linearGradient>
+    <linearGradient id="warmFrontGradient" x1="16" y1="12" x2="36" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#ff6b6b" />
+      <stop offset="100%" stopColor="#feca57" />
+    </linearGradient>
+    <linearGradient id="shieldBg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#0f172a" />
+      <stop offset="100%" stopColor="#030712" />
+    </linearGradient>
+  </defs>
+  <rect x="1.5" y="1.5" width="45" height="45" rx="12" fill="url(#shieldBg)" stroke="url(#vortexGradient1)" stroke-width="1.5" stroke-opacity="0.6" />
+  <path d="M 12 24 C 12 16 18 10 26 10 C 34 10 38 15 38 21 C 38 28 32 33 25 33 C 19 33 16 29 16 25 C 16 20 20 17 25 17 C 29 17 31 19 31 23" stroke="url(#contourGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <path d="M 17 31 C 20 35 27 37 32 34 C 36 31 37 25 35 20" stroke="url(#vortexGradient1)" stroke-width="2" stroke-dasharray="2.5 3" stroke-linecap="round" fill="none" />
+  <path d="M 10 17 C 14 13 22 13 28 15" stroke="url(#warmFrontGradient)" stroke-width="2.2" stroke-linecap="round" fill="none" />
+  <circle cx="25" cy="23" r="3.2" fill="#48dbfb" />
+  <circle cx="25" cy="23" r="1.2" fill="#ffffff" />
+</svg>

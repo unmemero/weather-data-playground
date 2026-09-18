@@ -41,8 +41,8 @@ export const CorrelationScatterChart: React.FC<CorrelationScatterChartProps> = (
   yMetric,
   onHoverPoint,
 }) => {
-  const xCfg = METRIC_CONFIGS[xMetric] || { label: xMetric, unit: '', color: '#38bdf8' };
-  const yCfg = METRIC_CONFIGS[yMetric] || { label: yMetric, unit: '', color: '#f43f5e' };
+  const xCfg = METRIC_CONFIGS[xMetric] || { label: xMetric, unit: '', color: '#48dbfb' };
+  const yCfg = METRIC_CONFIGS[yMetric] || { label: yMetric, unit: '', color: '#ff6b6b' };
 
   const chartData = useMemo(() => {
     // 1. Scatter Points Dataset
@@ -50,11 +50,11 @@ export const CorrelationScatterChart: React.FC<CorrelationScatterChartProps> = (
       type: 'scatter' as const,
       label: `Observations (${points.length})`,
       data: points.map((p) => ({ x: p.x, y: p.y })),
-      backgroundColor: 'rgba(56, 189, 248, 0.45)',
-      borderColor: '#38bdf8',
+      backgroundColor: 'rgba(72, 219, 251, 0.45)',
+      borderColor: '#48dbfb',
       pointRadius: 4,
       pointHoverRadius: 7,
-      pointHoverBackgroundColor: '#22d3ee',
+      pointHoverBackgroundColor: '#feca57',
       pointHoverBorderColor: '#ffffff',
       pointHoverBorderWidth: 2,
     };
@@ -77,7 +77,7 @@ export const CorrelationScatterChart: React.FC<CorrelationScatterChartProps> = (
           { x: minX, y: Math.round(y1 * 100) / 100 },
           { x: maxX, y: Math.round(y2 * 100) / 100 },
         ],
-        borderColor: stats.pearson_r >= 0 ? '#10b981' : '#f43f5e',
+        borderColor: stats.pearson_r >= 0 ? '#1dd1a1' : '#ff6b6b',
         borderWidth: 2.5,
         borderDash: [5, 5],
         pointRadius: 0,
@@ -162,7 +162,7 @@ export const CorrelationScatterChart: React.FC<CorrelationScatterChartProps> = (
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <div className="flex items-center gap-2">
-          <Target className="w-4 h-4 text-cyan-400" />
+          <Target className="w-4 h-4 text-[#0abde3]" />
           <span className="text-sm font-semibold text-slate-200">
             Bivariate Scatter & Linear Regression Plot
           </span>
@@ -170,10 +170,10 @@ export const CorrelationScatterChart: React.FC<CorrelationScatterChartProps> = (
 
         {stats && (
           <div className="flex items-center gap-3 text-xs font-mono">
-            <span className="px-2 py-0.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded">
+            <span className="px-2 py-0.5 bg-[#0abde3]/10 border border-[#0abde3]/30 text-[#48dbfb] rounded font-medium">
               Pearson r: <b>{stats.pearson_r}</b>
             </span>
-            <span className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 rounded">
+            <span className="px-2 py-0.5 bg-[#a29bfe]/10 border border-[#a29bfe]/30 text-[#a29bfe] rounded font-medium">
               R² (Variance Explained): <b>{r2}</b>
             </span>
           </div>

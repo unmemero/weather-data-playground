@@ -30,12 +30,12 @@ export const LiveStatsInspector: React.FC<LiveStatsInspectorProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <div className="flex items-center gap-2">
-          <Zap className="w-4 h-4 text-cyan-400" />
+          <Zap className="w-4 h-4 text-[#48dbfb]" />
           <span className="text-sm font-semibold text-slate-200">
             Real-Time Statistical & Filter Inspector
           </span>
         </div>
-        <span className="text-xs font-mono text-cyan-400 px-2 py-0.5 bg-cyan-500/10 border border-cyan-500/20 rounded">
+        <span className="text-xs font-mono text-[#48dbfb] px-2 py-0.5 bg-[#0abde3]/10 border border-[#0abde3]/20 rounded">
           Client-Side 60fps Compute
         </span>
       </div>
@@ -44,11 +44,11 @@ export const LiveStatsInspector: React.FC<LiveStatsInspectorProps> = ({
         {/* 1. Live SMA Smoothing Controller */}
         <div className="bg-slate-950/50 border border-slate-800/80 rounded-lg p-4 flex flex-col gap-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Sliders className="w-3.5 h-3.5" />
+            <span className="text-xs font-mono text-[#1dd1a1] uppercase tracking-wider flex items-center gap-1.5">
+              <Sliders className="w-3.5 h-3.5 text-[#1dd1a1]" />
               <span>Instant SMA Low-Pass Filter</span>
             </span>
-            <span className="text-xs font-mono px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 rounded">
+            <span className="text-xs font-mono px-2 py-0.5 bg-[#1dd1a1]/10 border border-[#1dd1a1]/30 text-[#2ed573] rounded">
               Window: {smaWindow}h
             </span>
           </div>
@@ -81,7 +81,7 @@ export const LiveStatsInspector: React.FC<LiveStatsInspectorProps> = ({
                 max="72"
                 value={smaWindow}
                 onChange={(e) => setSmaWindow(parseInt(e.target.value, 10))}
-                className="w-full accent-emerald-500 h-1.5 bg-slate-800 rounded-lg cursor-pointer"
+                className="w-full accent-[#1dd1a1] h-1.5 bg-slate-800 rounded-lg cursor-pointer"
                 data-testid="sma-slider"
               />
             </div>
@@ -90,10 +90,10 @@ export const LiveStatsInspector: React.FC<LiveStatsInspectorProps> = ({
           {/* Variance Reduction Readout */}
           <div className="flex items-center justify-between text-xs font-mono pt-2 border-t border-slate-800/80 mt-auto">
             <span className="text-slate-400 flex items-center gap-1">
-              <TrendingDown className="w-3.5 h-3.5 text-emerald-400" />
+              <TrendingDown className="w-3.5 h-3.5 text-[#1dd1a1]" />
               <span>Noise Variance Attenuation:</span>
             </span>
-            <span className="text-emerald-300 font-semibold">
+            <span className="text-[#2ed573] font-semibold">
               -{liveSMA.varianceReductionPct}%
             </span>
           </div>
@@ -102,11 +102,11 @@ export const LiveStatsInspector: React.FC<LiveStatsInspectorProps> = ({
         {/* 2. Live Pearson r & Regression Sub-Domain Inspector */}
         <div className="bg-slate-950/50 border border-slate-800/80 rounded-lg p-4 flex flex-col gap-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider">
+            <span className="text-xs font-mono text-[#48dbfb] uppercase tracking-wider">
               Instant Bivariate Correlation Filter
             </span>
             {livePearson.stats && (
-              <span className="text-xs font-mono px-2 py-0.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded font-semibold">
+              <span className="text-xs font-mono px-2 py-0.5 bg-[#0abde3]/15 border border-[#0abde3]/30 text-[#48dbfb] rounded font-semibold">
                 r = {livePearson.stats.pearson_r}
               </span>
             )}

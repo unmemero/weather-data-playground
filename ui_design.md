@@ -12,14 +12,15 @@ To create a clean, scientific, and immersive environment:
     *   `--border-color`: Translucent white (`rgba(255, 255, 255, 0.08)`)
     *   `--text-main`: Off-white (`#f3f4f6`)
     *   `--text-muted`: Medium gray (`#9ca3af`)
-*   **Scientific Accent Theme:** Glowing, variable-specific indicator colors:
-    *   🌡️ Temperature: Thermal Orange (`#ff5e36`)
-    *   💧 Relative Humidity: Aqua Blue (`#00b0ff`)
-    *   📈 Barometric Pressure: Pressure Green (`#00e676`)
-    *   💨 Wind Speed/Direction: Anemometer Yellow (`#ffd600`)
-    *   🌧️ Precipitation: Rain Violet (`#c51162`)
-    *   ☀️ Solar Radiation: Solar Orange (`#ff9100`)
-    *   🌱 Soil Moisture/Temp: Earth Emerald (`#10b981`)
+*   **Scientific Accent Theme (Option 3 - Vivid Coastal Oceanic):**
+    *   🌡️ Temperature: Molten Coral (`#ff6b6b`)
+    *   💧 Relative Humidity: Cerulean Blue (`#0abde3`)
+    *   ❄️ Dewpoint: Bright Ice (`#48dbfb`)
+    *   📈 Barometric Pressure: Vivid Jade (`#1dd1a1`)
+    *   💨 Wind Speed/Direction: Marigold Amber (`#feca57`)
+    *   🌧️ Precipitation: Royal Amethyst (`#a29bfe`)
+    *   ☀️ Solar Radiation: Sunburst Orange (`#ff9f43`)
+    *   🌱 Soil Moisture/Temp: Fresh Lime-Mint (`#2ed573`)
 
 ---
 

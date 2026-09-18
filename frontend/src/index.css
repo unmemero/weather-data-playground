@@ -11,14 +11,14 @@
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
 
-  /* Scientific Accent Indicator Palette - Vibrant Neon */
-  --accent-temp: #ff5e36;
-  --accent-humidity: #00b0ff;
-  --accent-pressure: #00e676;
-  --accent-wind: #ffd600;
-  --accent-rain: #7c4dff;
-  --accent-solar: #ff9100;
-  --accent-soil: #10b981;
+  /* Scientific Accent Indicator Palette - Option 3: Vivid Coastal Oceanic */
+  --accent-temp: #ff6b6b;
+  --accent-humidity: #0abde3;
+  --accent-pressure: #1dd1a1;
+  --accent-wind: #feca57;
+  --accent-rain: #a29bfe;
+  --accent-solar: #ff9f43;
+  --accent-soil: #2ed573;
 }
 
 body {

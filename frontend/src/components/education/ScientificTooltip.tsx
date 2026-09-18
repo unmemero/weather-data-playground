@@ -54,7 +54,7 @@ export const ScientificTooltip: React.FC<ScientificTooltipProps> = ({
         onClick={() => setIsOpen(!isOpen)}
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className="text-slate-400 hover:text-cyan-400 p-0.5 rounded-full transition-colors focus:outline-none"
+        className="text-slate-400 hover:text-[#48dbfb] p-0.5 rounded-full transition-colors focus:outline-none"
         aria-label={`Explain ${title}`}
         data-testid="scientific-tooltip-trigger"
       >
@@ -63,13 +63,13 @@ export const ScientificTooltip: React.FC<ScientificTooltipProps> = ({
 
       {isOpen && (
         <div
-          className={`absolute ${posClasses} ${alignClasses} w-72 p-3.5 bg-slate-900 border border-cyan-500/30 rounded-xl shadow-2xl z-[100] text-left backdrop-blur pointer-events-none transition-all duration-150 animate-in fade-in`}
+          className={`absolute ${posClasses} ${alignClasses} w-72 p-3.5 bg-slate-900 border border-[#0abde3]/40 rounded-xl shadow-2xl z-[100] text-left backdrop-blur pointer-events-none transition-all duration-150 animate-in fade-in`}
           data-testid="scientific-tooltip-content"
         >
-          <div className="text-xs font-bold text-cyan-300 font-mono mb-1">{title}</div>
+          <div className="text-xs font-bold text-[#48dbfb] font-mono mb-1">{title}</div>
           <p className="text-[11px] text-slate-300 leading-relaxed">{content}</p>
           {formula && (
-            <div className="mt-1.5 p-1.5 bg-slate-950/80 rounded border border-slate-800 text-[10px] font-mono text-cyan-200">
+            <div className="mt-1.5 p-1.5 bg-slate-950/80 rounded border border-slate-800 text-[10px] font-mono text-[#48dbfb]">
               {formula}
             </div>
           )}
