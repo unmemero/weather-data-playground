@@ -9,6 +9,7 @@ import {
   XCircle,
   Menu,
   Compass,
+  HelpCircle,
 } from 'lucide-react';
 import { WeatherProvider, useWeather } from './context/WeatherContext';
 import { TimeseriesChart, MetricKey } from './components/charts/TimeseriesChart';
@@ -29,6 +30,7 @@ import { MeteorologyLogo } from './components/common/MeteorologyLogo';
 import { NavigationSidebar, ActiveTab } from './components/navigation/NavigationSidebar';
 import { RawDataTable } from './components/data/RawDataTable';
 import { PortalTour } from './components/tutorial/PortalTour';
+import { WORKBENCH_TOURS } from './components/tutorial/workbenchTours';
 import { ScatterPoint } from './types';
 
 const MainLayout: React.FC = () => {
@@ -58,11 +60,12 @@ const MainLayout: React.FC = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
-  // Modals & Interactive Tour
+  // Modals & Interactive Tours
   const [isCityModalOpen, setIsCityModalOpen] = useState(false);
   const [isCaseStudyModalOpen, setIsCaseStudyModalOpen] = useState(false);
   const [isCsvModalOpen, setIsCsvModalOpen] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(false);
+  const [activeWorkbenchTour, setActiveWorkbenchTour] = useState<ActiveTab | null>(null);
 
   // Auto-launch interactive onboarding tour on user's first visit
   useEffect(() => {
@@ -277,6 +280,51 @@ const MainLayout: React.FC = () => {
               </div>
 
               <ErrorBoundary fallbackTitle="Workbook Tab View Error">
+                {/* Dedicated Active Workbench Context Bar & Guide Trigger */}
+                {WORKBENCH_TOURS[activeTab] && (
+                  <div className="glass-panel-subtle rounded-xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 border border-white/[0.08]">
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="w-2.5 h-2.5 rounded-full"
+                        style={{
+                          backgroundColor: WORKBENCH_TOURS[activeTab].accentColor,
+                          boxShadow: `0 0 10px ${WORKBENCH_TOURS[activeTab].accentColor}`,
+                        }}
+                      />
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-mono font-bold text-slate-100">
+                          {WORKBENCH_TOURS[activeTab].title}
+                        </span>
+                        <span
+                          className="text-[10px] font-mono px-2 py-0.5 rounded border font-semibold hidden sm:inline"
+                          style={{
+                            color: WORKBENCH_TOURS[activeTab].accentColor,
+                            borderColor: `${WORKBENCH_TOURS[activeTab].accentColor}44`,
+                            backgroundColor: `${WORKBENCH_TOURS[activeTab].accentColor}18`,
+                          }}
+                        >
+                          {WORKBENCH_TOURS[activeTab].badge}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => setActiveWorkbenchTour(activeTab)}
+                      className="flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold font-mono transition-all duration-150 border hover:brightness-110 active:scale-95 shadow-sm"
+                      style={{
+                        color: WORKBENCH_TOURS[activeTab].accentColor,
+                        borderColor: `${WORKBENCH_TOURS[activeTab].accentColor}55`,
+                        backgroundColor: `${WORKBENCH_TOURS[activeTab].accentColor}18`,
+                      }}
+                      title={`Learn how to use ${WORKBENCH_TOURS[activeTab].title} and what its components do`}
+                      data-testid="workbench-guide-btn"
+                    >
+                      <HelpCircle className="w-3.5 h-3.5" style={{ color: WORKBENCH_TOURS[activeTab].accentColor }} />
+                      <span>{WORKBENCH_TOURS[activeTab].guideButtonLabel || `${WORKBENCH_TOURS[activeTab].title.split(' ')[0]} Guide`}</span>
+                    </button>
+                  </div>
+                )}
+
                 {/* TAB 1: Timeseries Explorer */}
                 {activeTab === 'timeseries' && (
                   <div className="flex flex-col gap-6 animate-in fade-in duration-200">
@@ -294,7 +342,7 @@ const MainLayout: React.FC = () => {
                 {activeTab === 'correlation' && (
                   <div className="flex flex-col gap-6 animate-in fade-in duration-200">
                     {/* Metric Variable Pickers */}
-                    <div className="glass-panel-subtle rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+                    <div id="tour-corr-selectors" className="glass-panel-subtle rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
                       <div className="flex items-center gap-4 text-xs font-mono">
                         <span className="text-slate-400 uppercase tracking-wider font-semibold">
                           Correlation Variables:
@@ -443,6 +491,17 @@ const MainLayout: React.FC = () => {
 
       {/* Interactive Guided Portal Onboarding Tour */}
       <PortalTour isOpen={isTourOpen} onClose={handleTourClose} />
+
+      {/* Specialized Workbench Interactive Guided Tour */}
+      {activeWorkbenchTour && WORKBENCH_TOURS[activeWorkbenchTour] && (
+        <PortalTour
+          isOpen={true}
+          onClose={() => setActiveWorkbenchTour(null)}
+          steps={WORKBENCH_TOURS[activeWorkbenchTour].steps}
+          accentColor={WORKBENCH_TOURS[activeWorkbenchTour].accentColor}
+          tourId={`wb-${activeWorkbenchTour}`}
+        />
+      )}
 
       {/* Modals */}
       <CitySearchModal isOpen={isCityModalOpen} onClose={() => setIsCityModalOpen(false)} />

@@ -156,6 +156,7 @@ export const CorrelationScatterChart: React.FC<CorrelationScatterChartProps> = (
 
   return (
     <div
+      id="tour-corr-canvas"
       className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col gap-4 shadow-xl backdrop-blur"
       data-testid="correlation-scatter-container"
     >

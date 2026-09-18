@@ -204,7 +204,7 @@ export const RawDataTable: React.FC<RawDataTableProps> = ({
         </div>
 
         {/* Search, Filter & Export */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div id="tour-data-toolbar" className="flex flex-wrap items-center gap-3">
           {/* Quick Search */}
           <div className="relative">
             <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -240,6 +240,7 @@ export const RawDataTable: React.FC<RawDataTableProps> = ({
 
           {/* CSV Download Button */}
           <button
+            id="tour-data-export"
             onClick={handleExportCsv}
             disabled={totalRecords === 0}
             className="flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-[#0abde3] to-[#48dbfb] hover:opacity-90 disabled:bg-slate-800 disabled:text-slate-600 text-slate-950 rounded-lg text-xs font-mono font-bold transition-all shadow-sm"
@@ -252,7 +253,7 @@ export const RawDataTable: React.FC<RawDataTableProps> = ({
       </div>
 
       {/* Main Table Scroll Container */}
-      <div className="overflow-x-auto max-h-[560px] overflow-y-auto">
+      <div id="tour-data-table" className="overflow-x-auto max-h-[560px] overflow-y-auto">
         <table className="w-full text-left text-xs font-mono border-collapse">
           <thead className="sticky top-0 bg-slate-950/95 text-slate-400 border-b border-slate-800 z-10 backdrop-blur">
             <tr>

@@ -99,6 +99,26 @@ const TOPICS: Topic[] = [
 export const MeteorologyExplanationCard: React.FC = () => {
   const [selectedTopicId, setSelectedTopicId] = useState<string>('clausius-clapeyron');
 
+  // Automatically synchronize selected topic when guided tour highlights a specific topic
+  React.useEffect(() => {
+    const handleTourStep = (e: Event) => {
+      const customEvent = e as CustomEvent<{ targetId?: string }>;
+      const targetId = customEvent.detail?.targetId;
+      if (targetId === 'tour-physics-clausius') {
+        setSelectedTopicId('clausius-clapeyron');
+      } else if (targetId === 'tour-physics-kinematics') {
+        setSelectedTopicId('wind-vector-averaging');
+      } else if (targetId === 'tour-physics-fronts' || targetId === 'tour-physics-hypsometric') {
+        setSelectedTopicId('baroclinic-fronts');
+      } else if (targetId === 'tour-physics-radiation') {
+        setSelectedTopicId('solar-forcing-pbl');
+      }
+    };
+
+    window.addEventListener('portal-tour-step-change', handleTourStep);
+    return () => window.removeEventListener('portal-tour-step-change', handleTourStep);
+  }, []);
+
   const currentTopic = TOPICS.find((t) => t.id === selectedTopicId) || TOPICS[0];
   const IconComponent = currentTopic.icon;
 
@@ -108,7 +128,7 @@ export const MeteorologyExplanationCard: React.FC = () => {
       data-testid="education-explainer-card"
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+      <div id="tour-physics-suite" className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div className="flex items-center gap-2.5">
           <div className="p-2 bg-[#0abde3]/10 border border-[#0abde3]/30 rounded-xl text-[#48dbfb]">
             <BookOpen className="w-5 h-5" />
@@ -129,9 +149,21 @@ export const MeteorologyExplanationCard: React.FC = () => {
         {TOPICS.map((topic) => {
           const isSelected = topic.id === selectedTopicId;
           const TopicIcon = topic.icon;
+          const tourId =
+            topic.id === 'clausius-clapeyron'
+              ? 'tour-physics-clausius'
+              : topic.id === 'wind-vector-averaging'
+              ? 'tour-physics-kinematics'
+              : topic.id === 'baroclinic-fronts'
+              ? 'tour-physics-fronts'
+              : topic.id === 'solar-forcing-pbl'
+              ? 'tour-physics-radiation'
+              : undefined;
+
           return (
             <button
               key={topic.id}
+              id={tourId}
               onClick={() => setSelectedTopicId(topic.id)}
               className={`flex items-center gap-2 p-3 rounded-xl border text-left transition-all ${
                 isSelected

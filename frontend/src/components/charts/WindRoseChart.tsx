@@ -123,6 +123,7 @@ export const WindRoseChart: React.FC<WindRoseChartProps> = ({ stats, onHoverSect
 
   return (
     <div
+      id="tour-wind-canvas"
       className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col gap-4 shadow-xl backdrop-blur"
       data-testid="wind-rose-container"
     >
@@ -136,7 +137,7 @@ export const WindRoseChart: React.FC<WindRoseChartProps> = ({ stats, onHoverSect
         </div>
 
         {stats && (
-          <div className="flex items-center gap-2 text-xs font-mono">
+          <div id="tour-wind-legend" className="flex items-center gap-2 text-xs font-mono">
             <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 rounded">
               <Navigation
                 className="w-3.5 h-3.5 transform"

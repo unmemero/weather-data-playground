@@ -53,7 +53,10 @@ export const CorrelationLatexBox: React.FC<CorrelationLatexBoxProps> = ({
   const regressionFormula = `\\hat{Y} = (${stats.regression_slope}) \\cdot X + (${stats.regression_intercept})`;
 
   return (
-    <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 flex flex-col gap-4 shadow-lg backdrop-blur">
+    <div
+      id="tour-corr-latex"
+      className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 flex flex-col gap-4 shadow-lg backdrop-blur"
+    >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <div className="flex items-center gap-2">

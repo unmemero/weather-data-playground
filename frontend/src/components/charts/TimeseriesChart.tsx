@@ -239,47 +239,49 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
         {/* Metric Selectors */}
         <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-          <div className="flex items-center gap-1.5 bg-slate-950/80 border border-slate-700/80 rounded-lg px-2.5 py-1.5">
-            <span className="text-slate-400 flex items-center gap-1">
-              <Layers className="w-3.5 h-3.5 text-[#ff6b6b]" />
-              <span>Left Y:</span>
-            </span>
-            <select
-              value={primaryMetric}
-              onChange={(e) => setPrimaryMetric(e.target.value as MetricKey)}
-              className="bg-transparent text-[#ff6b6b] font-semibold outline-none cursor-pointer"
-            >
-              {Object.entries(METRIC_CONFIGS).map(([k, v]) => (
-                <option key={k} value={k} className="bg-slate-900 text-slate-200">
-                  {v.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          <div id="tour-ts-metrics" className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1.5 bg-slate-950/80 border border-slate-700/80 rounded-lg px-2.5 py-1.5">
+              <span className="text-slate-400 flex items-center gap-1">
+                <Layers className="w-3.5 h-3.5 text-[#ff6b6b]" />
+                <span>Left Y:</span>
+              </span>
+              <select
+                value={primaryMetric}
+                onChange={(e) => setPrimaryMetric(e.target.value as MetricKey)}
+                className="bg-transparent text-[#ff6b6b] font-semibold outline-none cursor-pointer"
+              >
+                {Object.entries(METRIC_CONFIGS).map(([k, v]) => (
+                  <option key={k} value={k} className="bg-slate-900 text-slate-200">
+                    {v.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="flex items-center gap-1.5 bg-slate-950/80 border border-slate-700/80 rounded-lg px-2.5 py-1.5">
-            <span className="text-slate-400 flex items-center gap-1">
-              <Layers className="w-3.5 h-3.5 text-[#0abde3]" />
-              <span>Right Y:</span>
-            </span>
-            <select
-              value={secondaryMetric}
-              onChange={(e) => setSecondaryMetric(e.target.value as MetricKey | 'none')}
-              className="bg-transparent text-[#48dbfb] font-semibold outline-none cursor-pointer"
-            >
-              <option value="none" className="bg-slate-900 text-slate-400">
-                (Disabled)
-              </option>
-              {Object.entries(METRIC_CONFIGS).map(([k, v]) => (
-                <option key={k} value={k} className="bg-slate-900 text-slate-200">
-                  {v.label}
+            <div className="flex items-center gap-1.5 bg-slate-950/80 border border-slate-700/80 rounded-lg px-2.5 py-1.5">
+              <span className="text-slate-400 flex items-center gap-1">
+                <Layers className="w-3.5 h-3.5 text-[#0abde3]" />
+                <span>Right Y:</span>
+              </span>
+              <select
+                value={secondaryMetric}
+                onChange={(e) => setSecondaryMetric(e.target.value as MetricKey | 'none')}
+                className="bg-transparent text-[#48dbfb] font-semibold outline-none cursor-pointer"
+              >
+                <option value="none" className="bg-slate-900 text-slate-400">
+                  (Disabled)
                 </option>
-              ))}
-            </select>
+                {Object.entries(METRIC_CONFIGS).map(([k, v]) => (
+                  <option key={k} value={k} className="bg-slate-900 text-slate-200">
+                    {v.label}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           {/* SMA Toggle & Window */}
-          <div className="flex items-center gap-2 bg-slate-950/80 border border-slate-700/80 rounded-lg px-2.5 py-1.5">
+          <div id="tour-ts-sma" className="flex items-center gap-2 bg-slate-950/80 border border-slate-700/80 rounded-lg px-2.5 py-1.5">
             <button
               onClick={() => setShowSMA(!showSMA)}
               className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-medium transition-colors ${
@@ -307,7 +309,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
 
         {/* Range Buttons */}
         {onRangeChange && (
-          <div className="flex items-center gap-1 bg-slate-950/80 border border-slate-800 p-1 rounded-lg">
+          <div id="tour-ts-range" className="flex items-center gap-1 bg-slate-950/80 border border-slate-800 p-1 rounded-lg">
             <Calendar className="w-3.5 h-3.5 text-slate-500 ml-1.5 mr-0.5" />
             {ranges.map((r) => (
               <button
@@ -327,7 +329,7 @@ export const TimeseriesChart: React.FC<TimeseriesChartProps> = ({
       </div>
 
       {/* Main Chart Canvas Container */}
-      <div className="h-[380px] w-full relative">
+      <div id="tour-ts-canvas" className="h-[380px] w-full relative">
         {readings.length > 0 ? (
           <Line data={chartData} options={chartOptions} />
         ) : (

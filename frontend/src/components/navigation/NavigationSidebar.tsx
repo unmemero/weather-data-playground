@@ -103,6 +103,9 @@ export const NAV_ITEMS: NavItem[] = [
     keywords: [
       'education',
       'physics',
+      'kinematics',
+      'vector',
+      'wind',
       'equations',
       'clausius-clapeyron',
       'hypsometric',

@@ -88,10 +88,13 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
   },
 ];
 
-interface PortalTourProps {
+export interface PortalTourProps {
   isOpen: boolean;
   onClose: (completed: boolean) => void;
   initialStepIndex?: number;
+  steps?: TourStep[];
+  accentColor?: string;
+  tourId?: string;
 }
 
 interface TargetRect {
@@ -107,12 +110,16 @@ export const PortalTour: React.FC<PortalTourProps> = ({
   isOpen,
   onClose,
   initialStepIndex = 0,
+  steps = PORTAL_TOUR_STEPS,
+  accentColor = '#48dbfb',
+  tourId = 'portal',
 }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(initialStepIndex);
   const [targetRect, setTargetRect] = useState<TargetRect | null>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
 
-  const step = PORTAL_TOUR_STEPS[currentStepIndex];
+  const activeSteps = steps.length > 0 ? steps : PORTAL_TOUR_STEPS;
+  const step = activeSteps[currentStepIndex] || activeSteps[0];
 
   // Update target rect with padding
   const updateTargetRect = useCallback(() => {
@@ -199,7 +206,7 @@ export const PortalTour: React.FC<PortalTourProps> = ({
         onClose(false);
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
-        if (currentStepIndex < PORTAL_TOUR_STEPS.length - 1) {
+        if (currentStepIndex < activeSteps.length - 1) {
           setCurrentStepIndex((prev) => prev + 1);
         } else {
           onClose(true);
@@ -214,7 +221,18 @@ export const PortalTour: React.FC<PortalTourProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, currentStepIndex, onClose]);
+  }, [isOpen, currentStepIndex, activeSteps.length, onClose]);
+
+  // Dispatch custom event to allow in-page components (e.g. Atmospheric Physics tabs) to synchronize
+  useEffect(() => {
+    if (isOpen && step) {
+      window.dispatchEvent(
+        new CustomEvent('portal-tour-step-change', {
+          detail: { stepId: step.id, targetId: step.targetId, tourId },
+        })
+      );
+    }
+  }, [isOpen, step, tourId]);
 
   if (!isOpen || !step) return null;
 
@@ -282,7 +300,7 @@ export const PortalTour: React.FC<PortalTourProps> = ({
   }
 
   const isFirstStep = currentStepIndex === 0;
-  const isLastStep = currentStepIndex === PORTAL_TOUR_STEPS.length - 1;
+  const isLastStep = currentStepIndex === activeSteps.length - 1;
 
   const handleNext = () => {
     if (isLastStep) {
@@ -313,7 +331,7 @@ export const PortalTour: React.FC<PortalTourProps> = ({
         aria-hidden="true"
       >
         <defs>
-          <mask id="portal-spotlight-mask">
+          <mask id={`spotlight-mask-${tourId}`}>
             {/* White covers entire viewport */}
             <rect x="0" y="0" width="100%" height="100%" fill="white" />
             {/* Cutout over active target */}
@@ -338,7 +356,7 @@ export const PortalTour: React.FC<PortalTourProps> = ({
           width="100%"
           height="100%"
           fill="rgba(5, 10, 20, 0.85)"
-          mask="url(#portal-spotlight-mask)"
+          mask={`url(#spotlight-mask-${tourId})`}
           className="backdrop-blur-[2px]"
         />
       </svg>
@@ -353,16 +371,20 @@ export const PortalTour: React.FC<PortalTourProps> = ({
             top: `${targetRect.top}px`,
             width: `${targetRect.width}px`,
             height: `${targetRect.height}px`,
-            boxShadow:
-              '0 0 0 2px #48dbfb, 0 0 24px rgba(72, 219, 251, 0.45), inset 0 0 12px rgba(72, 219, 251, 0.2)',
+            boxShadow: `0 0 0 2px ${accentColor}, 0 0 26px ${accentColor}80, inset 0 0 12px ${accentColor}33`,
             transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
-          {/* Animated radar pulse beacon */}
-          <div className="absolute -inset-1 rounded-2xl border border-[#48dbfb]/40 animate-ping pointer-events-none opacity-60" />
 
           {/* Step Badge Indicator Pin */}
-          <div className="absolute -top-3 -right-3 flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-[#48dbfb] to-[#0abde3] text-slate-950 font-mono font-bold text-xs shadow-[0_0_14px_rgba(72,219,251,0.6)] border border-white/40">
+          <div
+            className="absolute -top-3 -right-3 flex items-center justify-center w-7 h-7 rounded-full font-mono font-bold text-xs border border-white/40 shadow-lg"
+            style={{
+              backgroundColor: accentColor,
+              color: '#090d16',
+              boxShadow: `0 0 14px ${accentColor}`,
+            }}
+          >
             {currentStepIndex + 1}
           </div>
         </div>
@@ -380,12 +402,19 @@ export const PortalTour: React.FC<PortalTourProps> = ({
         {/* Top Accent Header */}
         <div className="flex items-center justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1.5 text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#48dbfb]/15 border border-[#48dbfb]/30 text-[#48dbfb] font-semibold">
-              <Compass className="w-3 h-3 text-[#48dbfb]" />
+            <span
+              className="flex items-center gap-1.5 text-[11px] font-mono px-2 py-0.5 rounded-md border font-semibold"
+              style={{
+                color: accentColor,
+                borderColor: `${accentColor}55`,
+                backgroundColor: `${accentColor}1f`,
+              }}
+            >
+              <Compass className="w-3 h-3" style={{ color: accentColor }} />
               <span>{step.badge}</span>
             </span>
             <span className="text-[11px] font-mono text-slate-400">
-              {currentStepIndex + 1} of {PORTAL_TOUR_STEPS.length}
+              {currentStepIndex + 1} of {activeSteps.length}
             </span>
           </div>
 
@@ -425,17 +454,21 @@ export const PortalTour: React.FC<PortalTourProps> = ({
         <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/10">
           {/* Progress Dots */}
           <div className="flex items-center gap-1.5">
-            {PORTAL_TOUR_STEPS.map((s, idx) => (
+            {activeSteps.map((s, idx) => (
               <button
                 key={s.id}
                 onClick={() => setCurrentStepIndex(idx)}
-                className={`h-1.5 rounded-full transition-all duration-200 ${
-                  idx === currentStepIndex
-                    ? 'w-5 bg-[#48dbfb] shadow-[0_0_8px_#48dbfb]'
-                    : idx < currentStepIndex
-                    ? 'w-1.5 bg-slate-500'
-                    : 'w-1.5 bg-slate-700'
-                }`}
+                className="h-1.5 rounded-full transition-all duration-200"
+                style={{
+                  width: idx === currentStepIndex ? '20px' : '6px',
+                  backgroundColor:
+                    idx === currentStepIndex
+                      ? accentColor
+                      : idx < currentStepIndex
+                      ? '#64748b'
+                      : '#334155',
+                  boxShadow: idx === currentStepIndex ? `0 0 8px ${accentColor}` : 'none',
+                }}
                 title={`Go to Step ${idx + 1}: ${s.title}`}
                 aria-label={`Go to Step ${idx + 1}`}
               />
@@ -456,7 +489,12 @@ export const PortalTour: React.FC<PortalTourProps> = ({
 
             <button
               onClick={handleNext}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#48dbfb] to-[#0abde3] hover:from-[#0abde3] hover:to-[#48dbfb] text-slate-950 font-bold text-xs transition-all shadow-[0_0_16px_rgba(72,219,251,0.3)] hover:shadow-[0_0_20px_rgba(72,219,251,0.5)]"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl font-bold text-xs transition-all hover:brightness-110 active:scale-95"
+              style={{
+                backgroundColor: accentColor,
+                color: '#090d16',
+                boxShadow: `0 0 16px ${accentColor}66`,
+              }}
               data-testid="tour-next-btn"
             >
               {isLastStep ? (
