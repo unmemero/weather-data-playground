@@ -410,6 +410,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
     <>
       {/* Desktop Docked Sidebar */}
       <aside
+        id="tour-sidebar-nav"
         className={`hidden lg:flex flex-col border-r border-white/[0.08] glass-panel-subtle transition-all duration-300 flex-shrink-0 sticky top-[61px] h-[calc(100vh-61px)] z-20 ${
           isCollapsed ? 'w-[68px]' : 'w-64 xl:w-72'
         }`}

@@ -44,13 +44,13 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
   },
   {
     id: 'sidebar-search',
-    targetId: 'tour-sidebar-search',
-    title: 'Searchable Analytical Workbenches',
-    badge: 'Navigation Directory',
-    category: 'Exploration & Tools',
+    targetId: 'tour-sidebar-nav',
+    title: 'What are Lab Workbenches?',
+    badge: 'Core Concept',
+    category: 'Analytical Architecture',
     description:
-      'Instantly filter and launch specialized meteorological workbenches: Timeseries Explorer, Polar Wind Rose, Pearson Correlation Scatter, Thermodynamics, and Raw Telemetry.',
-    tip: 'Press the "/" or "Ctrl+K" keyboard shortcut anywhere in the app to instantly focus this search box.',
+      'Workbenches are modular scientific workspaces designed to analyze the active atmospheric dataset through different analytical lenses. Instead of cramming all charts into one cluttered view, each workbench isolates a distinct meteorological discipline—such as multi-day temporal evolution, polar wind kinematics, bivariate correlations, or thermodynamic physical laws.',
+    tip: 'Your selected station, time range, and data series stay in sync as you switch between workbenches. You can also press "/" to search and filter them instantly.',
     preferredPlacement: 'right',
   },
   {
@@ -118,8 +118,13 @@ export const PortalTour: React.FC<PortalTourProps> = ({
   const updateTargetRect = useCallback(() => {
     if (!isOpen || !step) return;
 
-    const el = document.getElementById(step.targetId);
-    if (el) {
+    let el = document.getElementById(step.targetId);
+    // If target element is hidden (e.g. desktop sidebar on mobile), fallback to secondary target
+    if (el && (el.offsetWidth === 0 || el.offsetHeight === 0)) {
+      el = document.getElementById('tour-sidebar-search') || el;
+    }
+
+    if (el && (el.offsetWidth > 0 || el.offsetHeight > 0)) {
       const rect = el.getBoundingClientRect();
       const padding = 8;
 
