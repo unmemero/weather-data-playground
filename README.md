@@ -1,6 +1,30 @@
 # 🌦️ Meteorology Lab & Timeseries Workbook
 
-A high-precision, interactive atmospheric physics workbench and timeseries analysis platform. Built with a high-throughput **Rust Axum** backend, **SQLite WAL-mode** storage engine, and a reactive **React 18 + Vite + TypeScript + KaTeX + Chart.js** frontend.
+A high-precision, interactive atmospheric physics workbench and timeseries data analysis platform. Built with a high-throughput **Rust Axum** backend, **SQLite WAL-mode** storage engine, and a reactive **React 18 + Vite + TypeScript + KaTeX + Chart.js** frontend.
+
+The platform features a **Dual-Mode Architecture** designed to bridge intuitive, inquiry-based learning directly into professional atmospheric analytics.
+
+---
+
+## 🧭 Dual-Mode System
+
+### 1. 🎯 Guided Challenges Mode (Zero-Jargon Inquiry Learning)
+Designed for students and researchers without prior statistical or meteorological training. Users investigate real-world scientific questions through interactive experiments, plain-English analogies, and hypothesis predictions:
+* **Mission 1: "Can You Erase Day & Night?"** — Diurnal cycles, 24h rolling SMA low-pass filter, variance attenuation ratio, and discovering synoptic airmass trends. *(Awards 🛡️ Signal Master Badge)*
+* **Mission 2: "Best Friends, Bitter Enemies, or Total Strangers?"** — Bivariate correlation, scatter plots, Clausius-Clapeyron "Air Sponge" analogy, Pearson $r$, covariance, and least-squares regression. *(Awards 🔍 Pattern Hunter Badge)*
+* **Mission 3: "The Broken Compass"** — Modular arithmetic singularity trap ($350^\circ + 10^\circ \to 180^\circ$ South), Cartesian $U/V$ vector decomposition, and atmospheric mass flux conservation. *(Awards 🧭 Vector Navigator Badge)*
+* **Mission 4: "Autopsy of an Arctic Freeze"** — Synoptic front forensics using the Feb 2021 Texas Freeze, timeline scrubber, barometric inflection trough, clockwise wind veering, and sudden temperature crash. *(Awards ❄️ Forensic Meteorologist Badge)*
+* **Jargon Buster Tooltips:** Dotted-underline interactive tooltips providing everyday analogies (*Air Sponge*, *Squinting Eyes*, *Modular Trap*, *Atmospheric Wall*) for every complex concept.
+* **Slide-Out Science Notebook:** A drawer collecting earned badges, plain-English mental models, field rules of thumb, and formal KaTeX equations.
+
+### 2. 🔬 Research Workbench Mode (Professional Analysis Console)
+A 5-tab analytical instrument console for open exploration and custom data processing:
+1. **Timeseries Explorer:** Dual-Y axis scaling, 24h to 2-year range buttons, interactive SMA smoothing, and side-by-side split filter inspectors (`SmaFilterInspector` & `CorrelationFilterInspector`) with 3-tab "How to Use" guides (Workflow, Meteorology, Math).
+2. **Pearson Correlation Lab:** Dynamic variable pairing, scatter plotting, linear regression trendlines, quadrant deviation analysis, and synchronized formula hovers.
+3. **Polar Wind Rose & Kinematics:** 16-sector compass polar histogram, Beaufort speed tiers, and vector-averaged kinematics ($\bar{\Phi}, \bar{U}, \bar{V}$).
+4. **Atmospheric Physics Reference:** Interactive pedagogical reference covering Clausius-Clapeyron thermodynamics, wind vector kinematics, baroclinic fronts, and surface energy balance.
+5. **Raw Data & Portability Console:** Sortable telemetry table, RFC 4180 CSV export for Pandas/Excel, and batch CSV dataset upload.
+* **Interactive Guided Tours:** Global Lab Tour (Cyan) and 5 Workbench-specific Tours (Amber) with clean SVG spotlight cutout masking.
 
 ---
 
@@ -92,7 +116,7 @@ npm run dev
 ### Complete Test Matrix Execution:
 
 ```bash
-# Run all frontend tests (47 tests across 11 test suites)
+# Run all frontend tests (53 tests across 12 test suites)
 cd frontend
 npm test
 
@@ -105,7 +129,6 @@ cargo test
 
 # Run Rust linter & security audit
 cargo clippy --all-targets
-cargo audit
 ```
 
 ---

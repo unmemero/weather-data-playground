@@ -10,6 +10,8 @@ import {
   Menu,
   Compass,
   HelpCircle,
+  FlaskConical,
+  LayoutGrid,
 } from 'lucide-react';
 import { WeatherProvider, useWeather } from './context/WeatherContext';
 import { TimeseriesChart, MetricKey } from './components/charts/TimeseriesChart';
@@ -31,6 +33,7 @@ import { NavigationSidebar, ActiveTab } from './components/navigation/Navigation
 import { RawDataTable } from './components/data/RawDataTable';
 import { PortalTour } from './components/tutorial/PortalTour';
 import { WORKBENCH_TOURS } from './components/tutorial/workbenchTours';
+import { ChallengeContainer } from './components/challenges/ChallengeContainer';
 import { ScatterPoint } from './types';
 
 const MainLayout: React.FC = () => {
@@ -60,6 +63,27 @@ const MainLayout: React.FC = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
+  // Dual-Mode: Guided Challenges (Learning) vs Research Workbench (Pro)
+  const [appMode, setAppMode] = useState<'challenges' | 'workbench'>(() => {
+    try {
+      const saved = localStorage.getItem('weather_lab_active_mode');
+      return saved === 'workbench' || saved === 'challenges' ? saved : 'challenges';
+    } catch {
+      return 'challenges';
+    }
+  });
+
+  const handleModeChange = (mode: 'challenges' | 'workbench') => {
+    setAppMode(mode);
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        window.localStorage.setItem('weather_lab_active_mode', mode);
+      }
+    } catch {
+      // ignore
+    }
+  };
+
   // Modals & Interactive Tours
   const [isCityModalOpen, setIsCityModalOpen] = useState(false);
   const [isCaseStudyModalOpen, setIsCaseStudyModalOpen] = useState(false);
@@ -69,19 +93,29 @@ const MainLayout: React.FC = () => {
 
   // Auto-launch interactive onboarding tour on user's first visit
   useEffect(() => {
-    const hasSeenTour = localStorage.getItem('weather_lab_tour_v1');
-    if (!hasSeenTour) {
-      const timer = setTimeout(() => {
-        setIsTourOpen(true);
-      }, 750);
-      return () => clearTimeout(timer);
+    try {
+      const hasSeenTour = typeof window !== 'undefined' && window.localStorage ? window.localStorage.getItem('weather_lab_tour_v1') : null;
+      if (!hasSeenTour) {
+        const timer = setTimeout(() => {
+          setIsTourOpen(true);
+        }, 750);
+        return () => clearTimeout(timer);
+      }
+    } catch {
+      // ignore
     }
   }, []);
 
   const handleTourClose = (completed: boolean) => {
     setIsTourOpen(false);
     if (completed) {
-      localStorage.setItem('weather_lab_tour_v1', 'true');
+      try {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          window.localStorage.setItem('weather_lab_tour_v1', 'true');
+        }
+      } catch {
+        // ignore
+      }
     }
   };
 
@@ -134,6 +168,34 @@ const MainLayout: React.FC = () => {
               </span>
             </p>
           </div>
+        </div>
+
+        {/* App Mode Switcher (Guided Challenges vs Research Workbench) */}
+        <div className="flex items-center p-1 rounded-xl bg-slate-950/80 border border-white/10 shadow-inner">
+          <button
+            onClick={() => handleModeChange('challenges')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${
+              appMode === 'challenges'
+                ? 'bg-gradient-to-r from-[#0abde3]/25 to-[#48dbfb]/20 border border-[#48dbfb]/50 text-[#48dbfb] shadow-[0_0_12px_rgba(72,219,251,0.2)]'
+                : 'text-slate-400 hover:text-white'
+            }`}
+            data-testid="mode-challenges-btn"
+          >
+            <FlaskConical className="w-3.5 h-3.5" />
+            <span>Guided Challenges</span>
+          </button>
+          <button
+            onClick={() => handleModeChange('workbench')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${
+              appMode === 'workbench'
+                ? 'bg-gradient-to-r from-[#1dd1a1]/25 to-[#2ed573]/20 border border-[#1dd1a1]/50 text-[#1dd1a1] shadow-[0_0_12px_rgba(29,209,161,0.2)]'
+                : 'text-slate-400 hover:text-white'
+            }`}
+            data-testid="mode-workbench-btn"
+          >
+            <LayoutGrid className="w-3.5 h-3.5" />
+            <span>Workbench</span>
+          </button>
         </div>
 
         {/* Station Profile & Quick Actions */}
@@ -214,13 +276,20 @@ const MainLayout: React.FC = () => {
         </div>
       </header>
 
-      {/* 2. Main Workbench Workspace (Sidebar + Scrollable Content) */}
+      {/* 2. Main Workbench Workspace (Sidebar + Scrollable Content) vs Guided Challenges */}
       {!activeLocation && locations.length === 0 && !isLoading ? (
         <main className="flex-1 flex items-center justify-center p-6">
           <OnboardingHero
             onOpenSearch={() => setIsCityModalOpen(true)}
             onSelectPreset={(preset) => selectCity({ location: preset })}
             isLoading={isLoading}
+          />
+        </main>
+      ) : appMode === 'challenges' ? (
+        <main className="flex-1 px-4 sm:px-6 py-6 overflow-y-auto">
+          <ChallengeContainer
+            readings={readings}
+            onSwitchToWorkbench={() => handleModeChange('workbench')}
           />
         </main>
       ) : (

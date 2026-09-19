@@ -71,26 +71,36 @@ describe('Main Dashboard & Workbench Assembly', () => {
   it('allows navigating between workbook tabs', async () => {
     render(<App />);
 
+    await waitFor(() => {
+      expect(screen.getByText('Austin')).toBeInTheDocument();
+    });
+
+    // Switch to workbench mode if in challenges mode
+    const wbModeBtn = screen.queryByTestId('mode-workbench-btn');
+    if (wbModeBtn) {
+      fireEvent.click(wbModeBtn);
+    }
+
     // 1. Default Tab: Timeseries
-    expect(screen.getByText(/Timeseries & Dual-Y Explorer/i)).toBeInTheDocument();
+    expect(screen.getByTestId('timeseries-chart-container')).toBeInTheDocument();
 
     // 2. Switch to Bivariate Pearson & Regression Tab
-    const corrTab = screen.getByText(/Bivariate Pearson & Regression/i);
+    const corrTab = screen.getAllByTestId('nav-tab-correlation')[0];
     fireEvent.click(corrTab);
     expect(screen.getByText(/Correlation Variables:/i)).toBeInTheDocument();
 
     // 3. Switch to Polar Wind Rose Tab
-    const windTab = screen.getByText(/Polar Wind Rose & Vector Math/i);
+    const windTab = screen.getAllByTestId('nav-tab-wind')[0];
     fireEvent.click(windTab);
     expect(screen.getByText(/16-Sector Compass Polar Rose/i)).toBeInTheDocument();
 
     // 4. Switch to Atmospheric Physics Reference Tab
-    const eduTab = screen.getByText(/Atmospheric Physics Reference/i);
+    const eduTab = screen.getAllByTestId('nav-tab-education')[0];
     fireEvent.click(eduTab);
     expect(screen.getByText(/Atmospheric Physics & Pedagogical Reference/i)).toBeInTheDocument();
 
-    // 5. Switch to Raw Data & Telemetry Tab
-    const dataTab = screen.getByText(/Raw Data & Telemetry/i);
+    // 5. Switch to Raw Data & Ingest Tab
+    const dataTab = screen.getAllByTestId('nav-tab-data')[0];
     fireEvent.click(dataTab);
     expect(screen.getByTestId('raw-data-table-container')).toBeInTheDocument();
   });

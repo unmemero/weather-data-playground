@@ -142,19 +142,19 @@ When the application starts, Rust checks the active city profile:
 
 #### Location & Profile Management
 *   `GET /api/locations` -> List all saved city profiles (name, coordinates, is_active, last_synced).
-*   `POST /api/locations/select` -> Selects and activates a city profile, triggering immediate catch-up.
-*   `POST /api/locations/create` -> Adds a new city from Open-Meteo geocoding search.
+*   `GET /api/locations/search?query=Austin&count=5` -> Searches Open-Meteo geocoding API for candidate stations.
+*   `POST /api/locations/select` -> Selects existing profile (`{ "location_id": 1 }`) or inserts and activates a new station (`{ "location": { ... } }`), triggering immediate baseline backfill.
 *   `DELETE /api/locations/:id` -> Deletes a city profile and cascades all its stored readings.
 
 #### Timeseries & Analytics
-*   `GET /api/weather/sync` -> Manually triggers the catch-up backfill for the active city.
-*   `GET /api/weather/timeseries?range=24h|7d|30d|2y|all&series_id=...` -> Returns continuous rows for the requested time window and series.
-*   `GET /api/weather/stats/correlation?x=temp&y=humidity&range=30d` -> Computes Pearson $r$, covariance, mean values, and linear regression parameters in Rust.
-*   `GET /api/weather/stats/wind-vector?range=24h` -> Computes vector-averaged wind direction ($U, V$) and speed.
+*   `POST /api/weather/sync` -> Manually triggers the catch-up backfill for the active city.
+*   `GET /api/weather/timeseries?range=24h|7d|30d|90d|2y|all&series_id=...&sma_window=24` -> Returns continuous rows and optional backend SMA smoothed points.
+*   `GET /api/weather/stats/correlation?x_var=temperature_2m&y_var=relative_humidity&range=30d&series_id=...` -> Computes Pearson $r$, covariance, mean values, and linear regression parameters ($m, c, R^2$) in Rust.
+*   `GET /api/weather/stats/wind-rose?range=24h&series_id=...` -> Computes 16-sector compass polar frequencies and vector-averaged kinematics ($\bar{\Phi}, \bar{U}, \bar{V}$).
 
 #### Case Studies & Data Portability
-*   `POST /api/weather/case-study/download` -> Downloads a custom historical date range from Open-Meteo Archive API and saves it under `source_type = 'user_requested'`.
-*   `GET /api/weather/case-studies` -> Lists all saved case studies with their date ranges, record counts, and stale flags.
-*   `DELETE /api/weather/case-study/:series_id` -> Deletes a pinned case study.
-*   `GET /api/weather/export/csv` -> Exports active city data as a CSV file.
-*   `POST /api/weather/import/csv` -> Imports an external CSV weather file into the SQLite database.
+*   `POST /api/weather/case-studies/download` -> Downloads a custom historical date range from Open-Meteo Archive API and saves it under `source_type = 'user_requested'` with a given `series_id`.
+*   `GET /api/weather/case-studies` -> Lists all saved case studies with their date ranges, record counts, and 30-day staleness flags.
+*   `DELETE /api/weather/case-studies/:series_id` -> Deletes a pinned historical case study.
+*   `GET /api/weather/export/csv?range=30d&series_id=...` -> Exports RFC 4180 CSV file formatted for Pandas, R, and Excel.
+*   `POST /api/weather/import/csv` -> Imports an external CSV weather file into the SQLite database with transactional batch insert.

@@ -211,7 +211,7 @@ export const CurrentConditionsRibbon: React.FC<CurrentConditionsRibbonProps> = (
                 />
               )}
               <span>
-                {getCardinalDirection(latest.wind_direction_10m)}
+                {getCardinalDirection(latest.wind_direction_10m)} {latest.wind_direction_10m !== null ? `(${Math.round(latest.wind_direction_10m)}°)` : ''}
               </span>
             </span>
             <span className="text-[#feca57] font-medium">
